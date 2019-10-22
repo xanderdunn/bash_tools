@@ -55,9 +55,11 @@ python3 install.py --clang-completer
 
 # Python libraries
 # TODO: Don't install these if they're already installed
-pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm
+pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8
+ln -s ~/bash_tools/pylintrc ~/.pylintrc
+ln -s ~/bash_tools/flake8 ~/.flake8
 
 # Git Setup
 git config --global user.name "Xander Dunn"
 git config --global user.email "xander@praxispioneering.com"
-git config --global core.excludesfile ./gitignore_global
+git config --global core.excludesfile ~/bash_tools/gitignore_global
