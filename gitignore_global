@@ -1,0 +1,99 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.swo
+*.pyc
+bii
+ 
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+ 
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.txt
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+
+# Python #
+#####################
+*.egg-info
+.coverage
+*.swn
+*.pkl
+*.cache
+
+# vim #
+#####################
+*~
+build/
+deps/
+*.orig
+tags
+.vim*
+/Note.md
+NERD*
+
+# IDEs #
+####################
+.idea
+*.ropeproject
+
+# Xcode
+ld/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+xcodebuild/
+
+# Other
+# Coverity Scan
+cov-int/
+results
+*.bak
+
+# Scala
+scapegoat*
+.gradle
+
+# Binaries
+*.png
+*.mp4
