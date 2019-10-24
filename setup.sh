@@ -29,7 +29,10 @@ function create_dir_if_not_exist {
 }
 
 # Install killall
-sudo apt-get install -y psmisc
+sudo apt-get install -y psmisc silversearcher-ag
+
+# Set timezone
+sudo timedatectl set-timezone America/Los_Angeles
 
 add_line_to_file_if_missing "source ~/bash_tools/bashrc.sh" ~/.bashrc false
 
@@ -55,7 +58,7 @@ python3 install.py --clang-completer
 
 # Python libraries
 # TODO: Don't install these if they're already installed
-pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8
+pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow
 ln -s ~/bash_tools/pylintrc ~/.pylintrc
 ln -s ~/bash_tools/flake8 ~/.flake8
 
