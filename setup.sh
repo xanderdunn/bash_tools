@@ -27,6 +27,8 @@ function create_dir_if_not_exist {
         mkdir "$1"
     fi
 }
+# The NVIDIA registry GPG key is outdated by default on Google Deep Learning VMs
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 
 # Install killall
 sudo apt-get install -y psmisc silversearcher-ag
@@ -41,7 +43,8 @@ add_line_to_file_if_missing "APT::Default-Release \"stretch\";" /etc/apt/apt.con
 add_line_to_file_if_missing "deb http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
 add_line_to_file_if_missing "deb-src http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
 sudo apt-get update
-sudo apt-get install -y neovim python3-neovim
+sudo apt-get install -y neovim
+sudo apt-get install -t unstable -y python3-neovim
 sudo apt-get install -y exuberant-ctags
 create_dir_if_not_exist ~/.config/nvim
 create_dir_if_not_exist ~/.config/nvim/backup
