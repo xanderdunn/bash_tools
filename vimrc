@@ -7,7 +7,8 @@ Plug 'honza/vim-snippets'                   " default snippets for ultisnips
 Plug 'altercation/vim-colors-solarized'     " Color scheme
 Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
 Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
-Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
+"Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'vim-syntastic/syntastic'              " Synchronous linting for R
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
@@ -124,7 +125,7 @@ Plug 'FelikZ/ctrlp-py-matcher'              " faster ctrlp index searcher
 Plug 'b4winckler/vim-objc'                  " Better Obj-C indenting
 "Plug 'SirVer/ultisnips'                     " code snippets
 "Plug 'eraserhd/vim-ios'                     " .h <-> .m switching and project build
-Plug 'Valloric/YouCompleteMe'               " code completion
+"Plug 'Valloric/YouCompleteMe'               " code completion
 Plug 'Valloric/ListToggle'                  " Toggle the display of the location and quickfix windows
 Plug 'Chiel92/vim-autoformat'               " Auto-format code using existing formatters
 Plug 'qstrahl/vim-matchmaker'               " Highlight the term under the cursor
@@ -357,6 +358,18 @@ nnoremap <silent> <leader>hz :HoogleClose<CR>
 
 au FileType haskell nnoremap <buffer> <leader>t :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+
+" coc.nvim tab completion:
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
 
 " }}}
 
