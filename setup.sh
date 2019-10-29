@@ -62,8 +62,8 @@ python3 install.py --clang-completer
 # Python libraries
 # TODO: Don't install these if they're already installed
 pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow
-ln -s ~/bash_tools/pylintrc ~/.pylintrc
-ln -s ~/bash_tools/flake8 ~/.flake8
+ln -sf ~/bash_tools/pylintrc ~/.pylintrc
+ln -sf ~/bash_tools/flake8 ~/.flake8
 
 # Git Setup
 git config --global user.name "Xander Dunn"
@@ -73,4 +73,4 @@ git config --global core.editor "nvim"
 
 # Install Node.js, used by neovim coc.nvim plugin
 curl -sL install-node.now.sh | sudo bash
-nvim +CocInstall coc-python
+# nvim +CocInstall coc-python
