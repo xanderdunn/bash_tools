@@ -61,7 +61,7 @@ python3 install.py --clang-completer
 
 # Python libraries
 # TODO: Don't install these if they're already installed
-pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow
+pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow tables
 ln -sf ~/bash_tools/pylintrc ~/.pylintrc
 ln -sf ~/bash_tools/flake8 ~/.flake8
 
