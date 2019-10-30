@@ -10,6 +10,8 @@ shopt -s checkwinsize
 # vim keybindings in bash
 set -o vi
 
+export PATH="$PATH:~/.local/bin"
+
 # }}}
 
 # Aliases {{{
