@@ -64,6 +64,7 @@ python3 install.py --clang-completer
 pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow tables
 ln -sf ~/bash_tools/pylintrc ~/.pylintrc
 ln -sf ~/bash_tools/flake8 ~/.flake8
+ln -sf ~/bash_tools/tmux.confg ~/.tmux.conf
 
 # Git Setup
 git config --global user.name "Xander Dunn"

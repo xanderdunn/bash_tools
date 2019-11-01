@@ -40,5 +40,6 @@ alias vimdiff='nvim -d'
 alias untar='tar -xvzf'
 alias password="pwgen -s -y 30 1"
 alias vimrc="nvim ~/bash_tools/vimrc"
+alias devenv="export CUDA_VISIBLE_DEVICES=""; wandb off"
 # }}} 
 

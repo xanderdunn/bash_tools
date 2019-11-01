@@ -543,13 +543,17 @@ let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120), absolu
 " }}}
 
 " vim-autoformat {{{
-set updatetime=4000
+"set updatetime=4000
 " TextChanged,InsertLeave
 autocmd FileType python,cpp,scala,objc,swift,julia,haskell autocmd BufWritePost <buffer> call FormatAndCheck()
 
 function! FormatAndCheck()
         :silent! :Neomake
 endfunction
+" }}}
+
+" coc.nvim {{{
+set updatetime=300
 " }}}
 
 " vim-session {{{
@@ -830,6 +834,7 @@ function! AutoHighlightToggle()
   endif
 endfunction
 
+" GPG keys should not be saved elsewhere
 autocmd BufReadPre,FileReadPre *.gpg set noswapfile
 autocmd BufReadPre,FileReadPre *.gpg set nobackup
 autocmd BufReadPre,FileReadPre *.gpg set noundofile
