@@ -36,7 +36,7 @@ sudo apt-get install -y psmisc silversearcher-ag
 # Set timezone
 sudo timedatectl set-timezone America/Los_Angeles
 
-add_line_to_file_if_missing "source ~/bash_tools/bashrc.sh" ~/.bashrc false
+add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 
 # Install neovim
 add_line_to_file_if_missing "APT::Default-Release \"stretch\";" /etc/apt/apt.conf.d/99defaultrelease true
@@ -51,7 +51,7 @@ create_dir_if_not_exist ~/.config/nvim/backup
 create_dir_if_not_exist ~/.config/nvim/swap
 # vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-ln -fs ~/bash_tools/vimrc ~/.config/nvim/init.vim
+ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
 nvim +PlugInstall
 # YouCompleteMe
 sudo apt install -y build-essential cmake python3-dev
@@ -75,3 +75,5 @@ git config --global core.editor "nvim"
 # Install Node.js, used by neovim coc.nvim plugin
 curl -sL install-node.now.sh | sudo bash
 # nvim +CocInstall coc-python
+
+sudo apt autoremove
