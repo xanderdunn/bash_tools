@@ -37,6 +37,7 @@ sudo apt-get install -y psmisc silversearcher-ag
 sudo timedatectl set-timezone America/Los_Angeles
 
 add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
+add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 
 # Install neovim
 add_line_to_file_if_missing "APT::Default-Release \"stretch\";" /etc/apt/apt.conf.d/99defaultrelease true
@@ -53,15 +54,11 @@ create_dir_if_not_exist ~/.config/nvim/swap
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
 nvim +PlugInstall
-# YouCompleteMe
-sudo apt install -y build-essential cmake python3-dev
-cd ~/.config/nvim/plugged/YouCompleteMe
-# TODO: Don't install YouCompleteMe if it's already installed
-python3 install.py --clang-completer
 
 # Python libraries
 # TODO: Don't install these if they're already installed
-pip3 install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow tables ipython
+sudo easy_install3 pip
+pip3 --user install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow tables ipython
 ln -sf ~/bash_tools/pylintrc ~/.pylintrc
 ln -sf ~/bash_tools/flake8 ~/.flake8
 ln -sf ~/bash_tools/tmux.confg ~/.tmux.conf
@@ -69,7 +66,7 @@ ln -sf ~/bash_tools/tmux.confg ~/.tmux.conf
 # Git Setup
 git config --global user.name "Xander Dunn"
 git config --global user.email "xander@praxispioneering.com"
-git config --global core.excludesfile ~/bash_tools/gitignore_global
+git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 
 # Install Node.js, used by neovim coc.nvim plugin

@@ -445,7 +445,7 @@ let g:simple_bookmarks_filename = getcwd() + '.vim-bookmarks'
 let g:bookmark_auto_save = 1
 " }}}
 " iron.nvim {{{
-luafile $HOME/bash_tools/plugins.lua
+luafile $HOME/dev/bash_tools/plugins.lua
 " }}}
 
 " FastFold {{{
