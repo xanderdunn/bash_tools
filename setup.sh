@@ -32,6 +32,8 @@ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 
 # Install killall
 sudo apt-get install -y psmisc silversearcher-ag
+sudo apt-get install -y dbus # Required for timedatectl and missing on some GCP instances
+sudo apt-get install -y postgresql-client # psql
 
 # Set timezone
 sudo timedatectl set-timezone America/Los_Angeles
@@ -47,6 +49,7 @@ sudo apt-get update
 sudo apt-get install -y neovim
 sudo apt-get install -t unstable -y python3-neovim
 sudo apt-get install -y exuberant-ctags
+create_dir_if_not_exist ~/.config
 create_dir_if_not_exist ~/.config/nvim
 create_dir_if_not_exist ~/.config/nvim/backup
 create_dir_if_not_exist ~/.config/nvim/swap
@@ -57,6 +60,7 @@ nvim +PlugInstall
 
 # Python libraries
 # TODO: Don't install these if they're already installed
+sudo apt-get install -y python3-setuptools python3-distutils
 sudo easy_install3 pip
 pip3 --user install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow tables ipython
 ln -sf ~/bash_tools/pylintrc ~/.pylintrc
