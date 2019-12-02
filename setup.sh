@@ -34,6 +34,7 @@ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 sudo apt-get install -y psmisc silversearcher-ag
 sudo apt-get install -y dbus # Required for timedatectl and missing on some GCP instances
 sudo apt-get install -y postgresql-client # psql
+sudo apt-get install -y tmux
 
 # Set timezone
 sudo timedatectl set-timezone America/Los_Angeles
