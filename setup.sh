@@ -36,6 +36,7 @@ sudo apt-get install -y dbus # Required for timedatectl and missing on some GCP 
 sudo apt-get install -y postgresql-client # psql
 sudo apt-get install -y tmux
 sudo apt-get install -y htop # system perf monitoring
+sudo apt-get install -y unzip
 
 # Set timezone
 sudo timedatectl set-timezone America/Los_Angeles
