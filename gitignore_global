@@ -28,7 +28,7 @@ bii
 *.log
 *.sql
 *.sqlite
-*.txt
+# *.txt
  
 # OS generated files #
 ######################
