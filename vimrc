@@ -50,6 +50,7 @@ Plug 'lambdatoast/elm.vim'
 "Plug 'jmcantrell/vim-virtualenv'            " virtualenv control
 "Plug 'lambdalisue/vim-pyenv'                 " pyenv control
 Plug 'Vigemus/iron.nvim'
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 " }}}
 
 " General Code Formatting {{{
