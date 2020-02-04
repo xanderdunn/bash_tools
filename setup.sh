@@ -52,6 +52,7 @@ sudo apt-get update
 sudo apt-get install -y neovim
 sudo apt-get install -t unstable -y python3-neovim
 sudo apt-get install -y exuberant-ctags
+sudo apt-get install -y postgresql-client
 create_dir_if_not_exist ~/.config
 create_dir_if_not_exist ~/.config/nvim
 create_dir_if_not_exist ~/.config/nvim/backup
