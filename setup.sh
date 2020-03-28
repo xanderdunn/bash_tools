@@ -45,12 +45,19 @@ add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 
 # Install neovim
-add_line_to_file_if_missing "APT::Default-Release \"stretch\";" /etc/apt/apt.conf.d/99defaultrelease true
-add_line_to_file_if_missing "deb http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
-add_line_to_file_if_missing "deb-src http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
+DISTRO=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
+if ["$DISTRO" == "Debian"]; then
+    add_line_to_file_if_missing "APT::Default-Release \"stretch\";" /etc/apt/apt.conf.d/99defaultrelease true
+    add_line_to_file_if_missing "deb http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
+    add_line_to_file_if_missing "deb-src http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
+fi
 sudo apt-get update
 sudo apt-get install -y neovim
-sudo apt-get install -t unstable -y python3-neovim
+if ["$DISTRO" == "Debian"]; then
+    sudo apt-get install -t unstable -y python3-neovim
+else
+    sudo apt install -y python3-neovim
+fi
 sudo apt-get install -y exuberant-ctags
 sudo apt-get install -y postgresql-client
 create_dir_if_not_exist ~/.config
@@ -64,16 +71,16 @@ nvim +PlugInstall
 
 # Python libraries
 # TODO: Don't install these if they're already installed
-sudo apt-get install -y python3-setuptools python3-distutils
-sudo easy_install3 pip
-pip3 --user install numpy pandas wandb tensorflow-gpu scikit-learn tqdm pylint flake8 matplotlib plotly Pillow tables ipython
+# sudo apt-get install -y python3-setuptools python3-distutils
+# sudo easy_install3 pip
+pip3 install --user numpy pandas wandb scikit-learn tqdm pylint flake8 matplotlib Pillow tables ipython
 ln -sf ~/bash_tools/pylintrc ~/.pylintrc
 ln -sf ~/bash_tools/flake8 ~/.flake8
 ln -sf ~/bash_tools/tmux.confg ~/.tmux.conf
 
 # Git Setup
 git config --global user.name "Xander Dunn"
-git config --global user.email "xander@praxispioneering.com"
+git config --global user.email "business@xander.ai"
 git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 
