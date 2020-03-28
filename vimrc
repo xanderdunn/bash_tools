@@ -2,13 +2,14 @@
 call plug#begin()
 Plug 'scrooloose/nerdcommenter'             " Commenting shortcuts
 Plug 'scrooloose/nerdtree'                  " File system explorer
-Plug 'rking/ag.vim'                         " ag support for searching files
+"Plug 'rking/ag.vim'                         " ag support for searching files
+Plug 'Numkil/ag.nvim'                       " ag support for searching file, asynchronous neovim support
 Plug 'honza/vim-snippets'                   " default snippets for ultisnips
 Plug 'altercation/vim-colors-solarized'     " Color scheme
 Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
 Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
 "Plug 'vim-syntastic/syntastic'              " Synchronous linting for R
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
@@ -29,7 +30,7 @@ Plug 'pangloss/vim-javascript' " Improved JavaScript indentation and folding
 "Plug 'YankRing.vim'                          " Yank history
 " vim-repeat = a . function that repeats an entire macro rather than the last command only
 " Documentation search: https://github.com/Keithbsmiley/investigate.vim
-Plug 'thomasgubler/vim-gitignore'           " Respect .gitignore in vim's wildignore
+"Plug 'thomasgubler/vim-gitignore'           " Respect .gitignore in vim's wildignore
 "Plug 'tpope/vim-dispatch'                   " Asynchronous build
 " }}}
 
@@ -38,12 +39,12 @@ Plug 'thomasgubler/vim-gitignore'           " Respect .gitignore in vim's wildig
 " }}}
 
 " Elixir {{{
-Plug 'elixir-lang/vim-elixir'
+"Plug 'elixir-lang/vim-elixir'
 "Plug 'slashmili/alchemist.vim'
 " }}}
 
 " Elm {{{
-Plug 'lambdatoast/elm.vim'
+"Plug 'lambdatoast/elm.vim'
 " }}}
 
 " Python {{{
@@ -661,14 +662,10 @@ let g:rbpt_colorpairs = [
 " }}}
 let g:lisp_rainbow=1                    "Lisp rainbow parentheses
 
-" ag.vim {{{
+" ag.nvim {{{
 :command! -nargs=+ S :Ag! "<args>"
-:command! -nargs=+ SS :Ag! --scala "<args>" --ignore=*ext_libs*
-:command! -nargs=+ SC :Ag! --cpp "<args>"
 :command! -nargs=+ SP :Ag! --python "<args>"
-:command! -nargs=+ Sm :Ag! --matlab --ignore=*Test* --ignore=_* "<args>"
 :command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* "<args>"
-:command! -nargs=+ St :Ag! --matlab --ignore=*Test* --ignore=_* --ignore=*Tool* "<args>"
 " }}}
 
 " UltiSnips {{{
