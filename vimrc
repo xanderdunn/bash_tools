@@ -663,9 +663,9 @@ let g:rbpt_colorpairs = [
 let g:lisp_rainbow=1                    "Lisp rainbow parentheses
 
 " ag.nvim {{{
-:command! -nargs=+ S :Ag! "<args>"
-:command! -nargs=+ SP :Ag! --python "<args>"
-:command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* "<args>"
+:command! -nargs=+ S :Ag! <args>
+:command! -nargs=+ SP :Ag! --python <args>
+:command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* <args>
 " }}}
 
 " UltiSnips {{{
