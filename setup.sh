@@ -74,9 +74,11 @@ nvim +PlugInstall
 # sudo apt-get install -y python3-setuptools python3-distutils
 # sudo easy_install3 pip
 pip3 install --user numpy pandas wandb scikit-learn tqdm pylint flake8 matplotlib Pillow tables ipython
-ln -sf ~/bash_tools/pylintrc ~/.pylintrc
-ln -sf ~/bash_tools/flake8 ~/.flake8
-ln -sf ~/bash_tools/tmux.confg ~/.tmux.conf
+ln -sf ~/dev/bash_tools/pylintrc ~/.pylintrc
+ln -sf ~/dev/bash_tools/flake8 ~/.flake8
+ln -sf ~/dev/bash_tools/tmux.confg ~/.tmux.conf
+create_dir_if_not_exist ~/.config/htop
+ln -sf ~/dev/bash_tools/htoprc ~/.config/htop/htoprc
 
 # Git Setup
 git config --global user.name "Xander Dunn"
