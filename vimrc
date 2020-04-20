@@ -50,7 +50,8 @@ Plug 'pangloss/vim-javascript' " Improved JavaScript indentation and folding
 " Python {{{
 "Plug 'jmcantrell/vim-virtualenv'            " virtualenv control
 "Plug 'lambdalisue/vim-pyenv'                 " pyenv control
-Plug 'Vigemus/iron.nvim'
+"Plug 'Vigemus/iron.nvim'
+Plug 'jpalardy/vim-slime'    " vim repl
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' } " code formatting
 " }}}
 
@@ -330,7 +331,7 @@ inoremap <silent> <c-l> <Esc>:TmuxNavigateRight<cr>I
 nnoremap <leader>no :e Note.md<cr>
 
 " Exit terminal mode:
-"tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 noremap <silent> <leader>fp :let @+=expand("%:p")<CR>
 
@@ -447,7 +448,20 @@ let g:simple_bookmarks_filename = getcwd() + '.vim-bookmarks'
 let g:bookmark_auto_save = 1
 " }}}
 " iron.nvim {{{
-luafile $HOME/dev/bash_tools/plugins.lua
+"luafile $HOME/dev/bash_tools/plugins.lua
+" }}}
+
+" vim.slime {{{
+let g:slime_target = "neovim"
+" To use a python repl in neovim:
+" <Space> w to open a new split
+" Use <ctrl> j and <ctrl> h to move between the splits
+" i to enter insert mode on the terminal
+" Start the python3 process in the terminal
+" <Esc> to exet terminal mode
+" :echo b:terminal_job_id to get the terminal's process id, usually it's 6
+" Highlight some code in your code editor split and :ReplSend
+" When it asks, give it the terminal_job_id you found above
 " }}}
 
 " FastFold {{{
