@@ -15,6 +15,7 @@ Plug 'airblade/vim-rooter'                  " Change neovim's working directory 
 Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
+Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
 
 " R
 "Plug 'jalvesaq/Nvim-R'
@@ -570,6 +571,7 @@ endfunction
 
 " coc.nvim {{{
 set updatetime=300
+nnoremap <leader>e  :<C-u>CocList diagnostics<cr>
 " }}}
 
 " vim-session {{{
@@ -587,51 +589,51 @@ set statusline+=%{fugitive#statusline()}
 " }}}
 
 " YouCompleteMe {{{
-nnoremap <leader>d :YcmCompleter GoToDefinition <cr>
-nnoremap <leader>s :YcmCompleter GoToDeclaration <cr>
+"nnoremap <leader>d :YcmCompleter GoToDefinition <cr>
+"nnoremap <leader>s :YcmCompleter GoToDeclaration <cr>
 "let g:ycm_server_log_level = 'debug'
-if s:uname == "Darwin"
-    let g:ycm_path_to_python_interpreter = '/usr/local/anaconda3/envs/python2/bin/python'
-endif
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-:command! Errors :YcmDiag
-let g:ycm_confirm_extra_conf = 0
-set completeopt-=preview " Don't show the window at the top with additional completion information
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_collect_identifiers_from_tags_files = 1   " Load completion identifiers from the ctags files as well.  ctags files in use can be found with `:echo tagfiles()`
-let g:ycm_autoclose_preview_window_after_completion = 1 " Close the window at the top that appears with additional completion information
-let g:ycm_autoclose_preview_window_after_insertion = 1
-function! SetErrorsAndWarnings() " Only show the errors and warnings gutter if it's a file that I wrote
-    let currentFilePath = expand('%:p')
-    echo currentFilePath
-    if currentFilePath =~ '/Dropbox/dev/'
-        let g:ycm_show_diagnostics_ui = 1
-    elseif currentFilePath =~ '/local'
-        let g:ycm_show_diagnostics_ui = 1
-    else
-        let g:ycm_show_diagnostics_ui = 0
-    endif
-endfunction
+"if s:uname == "Darwin"
+    "let g:ycm_path_to_python_interpreter = '/usr/local/anaconda3/envs/python2/bin/python'
+"endif
+"let g:ycm_use_ultisnips_completer = 1
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+":command! Errors :YcmDiag
+"let g:ycm_confirm_extra_conf = 0
+"set completeopt-=preview " Don't show the window at the top with additional completion information
+"let g:ycm_add_preview_to_completeopt = 0
+"let g:ycm_collect_identifiers_from_tags_files = 1   " Load completion identifiers from the ctags files as well.  ctags files in use can be found with `:echo tagfiles()`
+"let g:ycm_autoclose_preview_window_after_completion = 1 " Close the window at the top that appears with additional completion information
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"function! SetErrorsAndWarnings() " Only show the errors and warnings gutter if it's a file that I wrote
+    "let currentFilePath = expand('%:p')
+    "echo currentFilePath
+    "if currentFilePath =~ '/Dropbox/dev/'
+        "let g:ycm_show_diagnostics_ui = 1
+    "elseif currentFilePath =~ '/local'
+        "let g:ycm_show_diagnostics_ui = 1
+    "else
+        "let g:ycm_show_diagnostics_ui = 0
+    "endif
+"endfunction
 " Execute the function before the file is opened so that it can be turned off in time for files that are be opened
 "autocmd BufRead * call SetErrorsAndWarnings()
 " Execute it on entering a buffer so that it can be turned on for files that were already read
 "autocmd BufEnter * call SetErrorsAndWarnings()
-let g:ycm_semantic_triggers =  {
-  \   'objc' : ['re!\@"\.*"\s',
-  \     're!\@\w+\.*\w*\s',
-  \     're!\@\(\w+\.*\w*\)\s',
-  \     're!\@\(\s*',
-  \     're!\@\[.*\]\s',
-  \     're!\@\[\s*',
-  \     're!\@\{.*\}\s',
-  \     're!\@\{\s*',
-  \     "re!\@\'.*\'\s",
-  \     '#ifdef ',
-  \     're!:\s*',
-  \     're!=\s*',
-  \     're!,\s*', ],
-  \ }
+"let g:ycm_semantic_triggers =  {
+  "\   'objc' : ['re!\@"\.*"\s',
+  "\     're!\@\w+\.*\w*\s',
+  "\     're!\@\(\w+\.*\w*\)\s',
+  "\     're!\@\(\s*',
+  "\     're!\@\[.*\]\s',
+  "\     're!\@\[\s*',
+  "\     're!\@\{.*\}\s',
+  "\     're!\@\{\s*',
+  "\     "re!\@\'.*\'\s",
+  "\     '#ifdef ',
+  "\     're!:\s*',
+  "\     're!=\s*',
+  "\     're!,\s*', ],
+  "\ }
 " }}}
 
 " ListToggle {{{
@@ -862,3 +864,5 @@ autocmd BufReadPre,FileReadPre *.gpg set noundofile
 
 :set listchars=eol:$
 
+" Remember:
+" gd to go to definition
