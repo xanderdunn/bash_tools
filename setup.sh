@@ -74,6 +74,8 @@ nvim +PlugInstall
 # sudo apt-get install -y python3-setuptools python3-distutils
 # sudo easy_install3 pip
 pip3 install --user numpy pandas wandb scikit-learn tqdm pylint flake8 matplotlib Pillow tables ipython
+pip3 install --user neovim jupytet PyQt5 # Dependencies for jupyter-vim
+pip3 install --user --upgrade jedi # Update to show floating window docs from coc.nvim
 ln -sf ~/dev/bash_tools/pylintrc ~/.pylintrc
 ln -sf ~/dev/bash_tools/flake8 ~/.flake8
 ln -sf ~/dev/bash_tools/tmux.confg ~/.tmux.conf
