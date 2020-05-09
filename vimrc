@@ -8,6 +8,7 @@ Plug 'honza/vim-snippets'                   " default snippets for ultisnips
 Plug 'altercation/vim-colors-solarized'     " Color scheme
 Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
 Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
+Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
 "Plug 'vim-syntastic/syntastic'              " Synchronous linting for R
