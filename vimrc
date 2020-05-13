@@ -895,3 +895,6 @@ autocmd BufReadPre,FileReadPre *.gpg set noundofile
 " gd to go to definition
 " K to show definition
 " TODO: Map JupyterSendCell and JupysterTerminal and JupysterConnect to keyboard shortcuts
+" TODO: Automatically and silently execute JupyterConnect when opening certain files
+" zz to center cursor on screen
+" TODO: Stop the folds from collapsing when running YAPF
