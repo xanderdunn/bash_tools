@@ -81,6 +81,8 @@ ln -sf ~/dev/bash_tools/flake8 ~/.flake8
 ln -sf ~/dev/bash_tools/tmux.confg ~/.tmux.conf
 create_dir_if_not_exist ~/.config/htop
 ln -sf ~/dev/bash_tools/htoprc ~/.config/htop/htoprc
+create_dir_if_not_exist ~/.config/yapf
+ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 
 # Git Setup
 git config --global user.name "Xander Dunn"

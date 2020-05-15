@@ -1,0 +1,3 @@
+[style]
+column_limit = 110
+split_complex_comprehension = True
