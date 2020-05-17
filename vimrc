@@ -377,7 +377,7 @@ inoremap <silent><expr> <Tab>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -898,3 +898,4 @@ autocmd BufReadPre,FileReadPre *.gpg set noundofile
 " TODO: Automatically and silently execute JupyterConnect when opening certain files
 " zz to center cursor on screen
 " TODO: Stop the folds from collapsing when running YAPF
+" :Git blame shows the blame in the history
