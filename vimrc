@@ -22,7 +22,7 @@ Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
 "Plug 'jalvesaq/Nvim-R'
 
 " JavaScript {{{
-Plug 'pangloss/vim-javascript' " Improved JavaScript indentation and folding
+"Plug 'pangloss/vim-javascript' " Improved JavaScript indentation and folding
 " }}}
 
 " Unused {{{
@@ -498,19 +498,19 @@ au FileType xml setlocal foldmethod=syntax
 function! SetFoldMethod()
    if &ft =~ 'vim'
         set foldmethod=marker   " I want to be able to manually sort into folded sections
-        set foldlevel=0
+        "set foldlevel=0
     elseif &ft =~ 'scala'
         setlocal foldmethod=indent
-        setlocal foldlevel=0
+        "setlocal foldlevel=0
     elseif &ft =~ 'py'
         setlocal foldmethod=indent
-        setlocal foldlevel=0
+        "setlocal foldlevel=0
     elseif &ft =~ 'julia'
         setlocal foldmethod=indent
-        setlocal foldlevel=1
+        "setlocal foldlevel=1
     elseif &ft =~ 'sh'
         setlocal foldmethod=marker
-        setlocal foldlevel=0
+        "setlocal foldlevel=0
     else
         set foldcolumn=0        " Something is trying to set foldcolumn=3 for .m objc files.  Override it.
         set foldmethod=syntax
@@ -899,3 +899,5 @@ autocmd BufReadPre,FileReadPre *.gpg set noundofile
 " zz to center cursor on screen
 " TODO: Stop the folds from collapsing when running YAPF
 " :Git blame shows the blame in the history
+" TODO: Learn how to edit all instances of a variable. This might help: 
+" https://github.com/neoclide/coc.nvim/wiki/Multiple-cursors-support

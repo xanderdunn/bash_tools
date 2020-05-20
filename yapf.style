@@ -1,3 +1,3 @@
 [style]
-column_limit = 110
+column_limit = 122
 split_complex_comprehension = True
