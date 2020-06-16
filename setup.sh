@@ -28,12 +28,12 @@ function create_dir_if_not_exist {
     fi
 }
 # The NVIDIA registry GPG key is outdated by default on Google Deep Learning VMs
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+# curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 
 # Install killall
 sudo apt-get install -y psmisc silversearcher-ag
 sudo apt-get install -y dbus # Required for timedatectl and missing on some GCP instances
-sudo apt-get install -y postgresql-client # psql
+# sudo apt-get install -y postgresql-client # psql
 sudo apt-get install -y tmux
 sudo apt-get install -y htop # system perf monitoring
 sudo apt-get install -y unzip
@@ -50,16 +50,21 @@ if ["$DISTRO" == "Debian"]; then
     add_line_to_file_if_missing "APT::Default-Release \"stretch\";" /etc/apt/apt.conf.d/99defaultrelease true
     add_line_to_file_if_missing "deb http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
     add_line_to_file_if_missing "deb-src http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
+elif ["$DISTRO" == "Ubuntu"]; then
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt-get update
+    sudo apt-get install neovim
+else
+    sudo apt-get install -y neovim
 fi
 sudo apt-get update
-sudo apt-get install -y neovim
 if ["$DISTRO" == "Debian"]; then
     sudo apt-get install -t unstable -y python3-neovim
 else
     sudo apt install -y python3-neovim
 fi
 sudo apt-get install -y exuberant-ctags
-sudo apt-get install -y postgresql-client
+# sudo apt-get install -y postgresql-client
 create_dir_if_not_exist ~/.config
 create_dir_if_not_exist ~/.config/nvim
 create_dir_if_not_exist ~/.config/nvim/backup
@@ -73,9 +78,9 @@ nvim +PlugInstall
 # TODO: Don't install these if they're already installed
 # sudo apt-get install -y python3-setuptools python3-distutils
 # sudo easy_install3 pip
-pip3 install --user numpy pandas wandb scikit-learn tqdm pylint flake8 matplotlib Pillow tables ipython
-pip3 install --user neovim jupytet PyQt5 # Dependencies for jupyter-vim
-pip3 install --user --upgrade jedi # Update to show floating window docs from coc.nvim
+# pip3 install --user numpy pandas wandb scikit-learn tqdm pylint flake8 matplotlib Pillow tables ipython
+# pip3 install --user neovim jupytet PyQt5 # Dependencies for jupyter-vim
+# pip3 install --user --upgrade jedi # Update to show floating window docs from coc.nvim
 ln -sf ~/dev/bash_tools/pylintrc ~/.pylintrc
 ln -sf ~/dev/bash_tools/flake8 ~/.flake8
 ln -sf ~/dev/bash_tools/tmux.confg ~/.tmux.conf
@@ -86,7 +91,7 @@ ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 
 # Git Setup
 git config --global user.name "Xander Dunn"
-git config --global user.email "business@xander.ai"
+git config --global user.email "xander@praxispioneering.com"
 git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 
