@@ -8,10 +8,10 @@ Plug 'honza/vim-snippets'                   " default snippets for ultisnips
 Plug 'altercation/vim-colors-solarized'     " Color scheme
 Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
 Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
-Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
+"Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
-"Plug 'vim-syntastic/syntastic'              " Synchronous linting for R
+Plug 'vim-syntastic/syntastic'              " Synchronous linting for R
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
@@ -136,7 +136,8 @@ Plug 'Chiel92/vim-autoformat'               " Auto-format code using existing fo
 Plug 'qstrahl/vim-matchmaker'               " Highlight the term under the cursor
 Plug 'xolox/vim-misc'                       " Dependency for vim-easy-tags
 Plug 'xolox/vim-easytags'                   " Automatically update exuberant ctags for syntax highlighting of user-defined variables
-Plug 'toyamarinyon/vim-swift'               " Swift syntax and indenting
+"Plug 'toyamarinyon/vim-swift'               " Swift syntax and indenting
+Plug 'keith/swift.vim'
 " }}}
 call plug#end()
 " }}}
@@ -584,6 +585,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_r_lintr_checker = 0
 let g:syntastic_r_checkers = ['lintr']
 let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120), absolute_path_linter=NULL, todo_comment_linter=NULL)"
+let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 " }}}
 
 " vim-autoformat {{{
