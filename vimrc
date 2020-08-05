@@ -11,7 +11,7 @@ Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It 
 "Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
-Plug 'vim-syntastic/syntastic'              " Synchronous linting for R
+Plug 'vim-syntastic/syntastic'              " Synchronous linting for R and Swift
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
@@ -585,7 +585,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_r_lintr_checker = 0
 let g:syntastic_r_checkers = ['lintr']
 let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120), absolute_path_linter=NULL, todo_comment_linter=NULL)"
-let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
+let g:syntastic_swift_checkers = ['swiftlint']
 " }}}
 
 " vim-autoformat {{{
