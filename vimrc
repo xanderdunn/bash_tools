@@ -17,6 +17,7 @@ Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
+Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 
 " R
 "Plug 'jalvesaq/Nvim-R'
@@ -476,6 +477,7 @@ let g:simple_bookmarks_filename = getcwd() + '.vim-bookmarks'
 "let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 " }}}
+
 " iron.nvim {{{
 "luafile $HOME/dev/bash_tools/plugins.lua
 " }}}
@@ -582,9 +584,7 @@ let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_r_lintr_checker = 0
-let g:syntastic_r_checkers = ['lintr']
-let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120), absolute_path_linter=NULL, todo_comment_linter=NULL)"
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['swift'], 'passive_filetypes': ['python'] }
 let g:syntastic_swift_checkers = ['swiftlint']
 " }}}
 
@@ -705,7 +705,6 @@ let g:rbpt_colorpairs = [
     "\ ['black',       'SeaGreen3'],
     "\ ['darkgray',    'DarkOrchid3'],
 " }}}
-let g:lisp_rainbow=1                    "Lisp rainbow parentheses
 
 " ag.nvim {{{
 :command! -nargs=+ S :Ag! <args>
