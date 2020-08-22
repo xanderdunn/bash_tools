@@ -3,7 +3,8 @@ call plug#begin()
 Plug 'scrooloose/nerdcommenter'             " Commenting shortcuts
 Plug 'scrooloose/nerdtree'                  " File system explorer
 "Plug 'rking/ag.vim'                         " ag support for searching files
-Plug 'Numkil/ag.nvim'                       " ag support for searching file, asynchronous neovim support
+"Plug 'Numkil/ag.nvim'                       " ag support for searching file, asynchronous neovim support
+Plug 'mileszs/ack.vim'                      " File string search
 Plug 'honza/vim-snippets'                   " default snippets for ultisnips
 Plug 'altercation/vim-colors-solarized'     " Color scheme
 Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
@@ -352,13 +353,13 @@ let g:neomake_haskell_ghc_mod_args = '-g-Wall'
 nnoremap <silent> <leader>hh :Hoogle<CR>
 
 " Hoogle and prompt for input
-nnoremap <leader>hH :Hoogle 
+nnoremap <leader>hH :Hoogle
 
 " Hoogle for detailed documentation (e.g. "Functor")
 nnoremap <silent> <leader>hi :HoogleInfo<CR>
 
 " Hoogle for detailed documentation and prompt for input
-nnoremap <leader>hI :HoogleInfo 
+nnoremap <leader>hI :HoogleInfo
 
 " Hoogle, close the Hoogle window
 nnoremap <silent> <leader>hz :HoogleClose<CR>
@@ -706,10 +707,11 @@ let g:rbpt_colorpairs = [
     "\ ['darkgray',    'DarkOrchid3'],
 " }}}
 
-" ag.nvim {{{
-:command! -nargs=+ S :Ag! <args>
-:command! -nargs=+ SP :Ag! --python <args>
-:command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* <args>
+" ag.nvim ack.vim {{{
+let g:ackprg = 'ag --vimgrep --smart-case'
+:command! -nargs=+ S :Ack '<args>'
+":command! -nargs=+ SP :Ag! --python <args>
+":command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* <args>
 " }}}
 
 " UltiSnips {{{
@@ -747,7 +749,7 @@ inoremap <silent> <F3> <ESC>:YRShow<cr>
 
 " vim-livedown {{{
 let g:livedown_autorun = 1
-let g:livedown_open = 1 
+let g:livedown_open = 1
 let g:livedown_port = 1337
 " }}}
 
@@ -900,5 +902,5 @@ autocmd BufReadPre,FileReadPre *.gpg set noundofile
 " zz to center cursor on screen
 " TODO: Stop the folds from collapsing when running YAPF
 " :Git blame shows the blame in the history
-" TODO: Learn how to edit all instances of a variable. This might help: 
+" TODO: Learn how to edit all instances of a variable. This might help:
 " https://github.com/neoclide/coc.nvim/wiki/Multiple-cursors-support
