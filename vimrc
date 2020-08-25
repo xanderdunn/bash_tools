@@ -7,8 +7,8 @@ Plug 'scrooloose/nerdtree'                  " File system explorer
 Plug 'mileszs/ack.vim'                      " File string search
 Plug 'honza/vim-snippets'                   " default snippets for ultisnips
 Plug 'altercation/vim-colors-solarized'     " Color scheme
-Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
-Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
+"Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
+"Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
 "Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
@@ -16,7 +16,7 @@ Plug 'vim-syntastic/syntastic'              " Synchronous linting for R and Swif
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
-Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
+"Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
 Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 
@@ -84,13 +84,13 @@ Plug 'ekalinin/Dockerfile.vim'
 " }}}
 
 " Haskell {{{
-Plug 'neovimhaskell/haskell-vim'        " syntax highlightingn
-Plug 'enomsg/vim-haskellConcealPlus'    " Show common Haskell symbols as unicode characters
+"Plug 'neovimhaskell/haskell-vim'        " syntax highlightingn
+"Plug 'enomsg/vim-haskellConcealPlus'    " Show common Haskell symbols as unicode characters
 "Plug 'dag/vim2hs'                      "syntax highlighting and converting functions to pointfree, syntax highlighting was too slow for me
-Plug 'bitc/vim-hdevtools'               "Lightning fast type-checking
+"Plug 'bitc/vim-hdevtools'               "Lightning fast type-checking
 "Plug 'eagletmt/ghcmod-vim'
 "Plug 'eagletmt/neco-ghc'
-Plug 'Twinside/vim-hoogle'
+"Plug 'Twinside/vim-hoogle'
 "Plug 'mpickering/hlint-refactor-vim'
 " https://github.com/begriffs/haskell-vim-now/blob/master/.vimrc
 " }}}
@@ -106,7 +106,7 @@ Plug 'airblade/vim-gitgutter'               " Show which lines have changed in t
 " }}}
 
 " Solidity {{{
-Plug 'tomlion/vim-solidity'
+"Plug 'tomlion/vim-solidity'
 " }}}
 
 " tmux {{{
@@ -117,7 +117,7 @@ Plug 'tmux-plugins/vim-tmux'              " Proper syntax highlighting and editi
 " }}}
 
 " Go {{{
-Plug 'fatih/vim-go', {'for': 'go'}          " Autocompletion, syntax highlighting, etc.
+"Plug 'fatih/vim-go', {'for': 'go'}          " Autocompletion, syntax highlighting, etc.
 " }}}
 
 " Markdown {{{
