@@ -55,8 +55,9 @@ Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 "Plug 'jmcantrell/vim-virtualenv'            " virtualenv control
 "Plug 'lambdalisue/vim-pyenv'                 " pyenv control
 "Plug 'Vigemus/iron.nvim'
-Plug 'jpalardy/vim-slime'    " vim repl
+"Plug 'jpalardy/vim-slime'    " vim repl
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' } " code formatting
+Plug 'tmhedberg/SimpylFold'
 " }}}
 
 " General Code Formatting {{{
@@ -106,7 +107,7 @@ Plug 'airblade/vim-gitgutter'               " Show which lines have changed in t
 " }}}
 
 " Solidity {{{
-"Plug 'tomlion/vim-solidity'
+Plug 'tomlion/vim-solidity'
 " }}}
 
 " tmux {{{
@@ -122,8 +123,8 @@ Plug 'tmux-plugins/vim-tmux'              " Proper syntax highlighting and editi
 
 " Markdown {{{
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'            " Highlighting, folding, etc.
-Plug 'shime/vim-livedown'                 " Live updating Markdown preview
+"Plug 'plasticboy/vim-markdown'            " Highlighting, folding, etc.
+"Plug 'shime/vim-livedown'                 " Live updating Markdown preview
 " }}}
 
 " Xcode functionality {{{
@@ -183,7 +184,7 @@ set hidden                      " Open new file without being forced so save ope
 set wildmenu
 set wildmode=list:longest
 " Ignore file types in autocomplete
-set wildignore=*.pkl,*.swp,*.bak,*.pyc,*.class,*.o,*.obj,.DS_Store,*.jpg,*.d,*.dia,*.imageset,*.png,*.ai,*/Pods/*,*.xcworkspace,*.xcodeproj,*/tmp/*,*.lock,*/xcodebuild/*,*.orig,*.rope*,*/data/*,*/node_modules/*
+set wildignore=*.pkl,*.swp,*.bak,*.pyc,*.class,*.o,*.obj,.DS_Store,*.jpg,*.d,*.dia,*.imageset,*.png,*.ai,*/Pods/*,*.xcworkspace,*.xcodeproj,*/tmp/*,*.lock,*/xcodebuild/*,*.orig,*.rope*,*/node_modules/*
 set ruler                       " Show cursor position info in a line at the bottom
 set backspace=indent,eol,start  " Allow backspacing over everything in insert mode
 set undofile                    " Preserve undo information between sessions
@@ -463,7 +464,7 @@ endfunction
 
 " nerd-tree {{{
 map <leader>f :NERDTreeToggle<CR>
-let NERDTreeIgnore=['__init__.py', '\.egg-info', 'build[[dir]]', '\.jar', 'scapegoat\.', '__pycache__', '\.tf', '\.tf.meta', '\.png', '\.pyc', '\.lprof', '\.csv', 'checkpint', '\.txt', 'data[[dir]]', 'node_modules[[dir]]']
+let NERDTreeIgnore=['__init__.py', '\.egg-info', 'build[[dir]]', '\.jar', 'scapegoat\.', '__pycache__', '\.tf', '\.tf.meta', '\.png', '\.pyc', '\.lprof', '\.csv', 'checkpint', '\.txt', 'node_modules[[dir]]']
 " }}}
 
 " simple-bookmark.vim {{{
@@ -520,7 +521,7 @@ function! SetFoldMethod()
         set foldmethod=syntax
     endif
 endfun
-autocmd BufRead * call SetFoldMethod()
+"autocmd BufRead * call SetFoldMethod()
 set foldnestmax=5
 set foldcolumn=0
 let g:fastfold_savehook = 0     " Don't update folds on file save
@@ -709,7 +710,9 @@ let g:rbpt_colorpairs = [
 
 " ag.nvim ack.vim {{{
 let g:ackprg = 'ag --vimgrep --smart-case'
-:command! -nargs=+ S :Ack '<args>'
+:command! -nargs=+ S :Ack --python '<args>'
+:command! -nargs=+ SS :Ack --swift '<args>'
+:command! -nargs=+ SA :Ack '<args>'
 ":command! -nargs=+ SP :Ag! --python <args>
 ":command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* <args>
 " }}}
@@ -771,6 +774,8 @@ autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
   \   exe "normal! g`\"" |
   \ endif
+
+cnoreabbrev up ARsyncUp
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -894,13 +899,17 @@ autocmd BufReadPre,FileReadPre *.gpg set noundofile
 
 :set listchars=eol:$
 
+map <C-Y> :call yapf#YAPF()<cr>
+imap <C-Y> <c-o>:call yapf#YAPF()<cr>
+
 " Remember:
 " gd to go to definition
 " K to show definition
-" TODO: Map JupyterSendCell and JupysterTerminal and JupysterConnect to keyboard shortcuts
-" TODO: Automatically and silently execute JupyterConnect when opening certain files
 " zz to center cursor on screen
-" TODO: Stop the folds from collapsing when running YAPF
 " :Git blame shows the blame in the history
+" Select some Python code and press Ctrl-C to run yapf on it
+" YAPF usage: https://github.com/google/yapf/tree/main/plugins
+" TODO: What's the command for running yapf on a selection of code?
+" TODO: Stop the folds from collapsing when running YAPF
 " TODO: Learn how to edit all instances of a variable. This might help:
 " https://github.com/neoclide/coc.nvim/wiki/Multiple-cursors-support
