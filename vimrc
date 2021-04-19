@@ -111,10 +111,10 @@ Plug 'tomlion/vim-solidity'
 " }}}
 
 " tmux {{{
-Plug 'christoomey/vim-tmux-navigator'     " Navigate tmux panes and windows like vim splist
-Plug 'benmills/vimux'                     " vim + tmux convenience commands
+"Plug 'christoomey/vim-tmux-navigator'     " Navigate tmux panes and windows like vim splist
+"Plug 'benmills/vimux'                     " vim + tmux convenience commands
 Plug 'xolox/vim-session'                  " Save and restore vim state
-Plug 'tmux-plugins/vim-tmux'              " Proper syntax highlighting and editing of tmux.conf
+"Plug 'tmux-plugins/vim-tmux'              " Proper syntax highlighting and editing of tmux.conf
 " }}}
 
 " Go {{{
@@ -516,16 +516,20 @@ function! SetFoldMethod()
     elseif &ft =~ 'sh'
         setlocal foldmethod=marker
         "setlocal foldlevel=0
+    elseif &ft =~ 'cpp'
+        setlocal foldmethod=indent
     else
         set foldcolumn=0        " Something is trying to set foldcolumn=3 for .m objc files.  Override it.
         set foldmethod=syntax
     endif
 endfun
-"autocmd BufRead * call SetFoldMethod()
+autocmd BufRead * call SetFoldMethod()
+set foldlevel=2
+"autocmd Filetype cpp AnyFoldActivate
 set foldnestmax=5
 set foldcolumn=0
-let g:fastfold_savehook = 0     " Don't update folds on file save
-let g:fastfold_togglehook = 1   " Update folds when the user toggles a fold
+"let g:fastfold_savehook = 0     " Don't update folds on file save
+"let g:fastfold_togglehook = 1   " Update folds when the user toggles a fold
 " Go to the end of the current fold
 nmap z] zo]z
 " Go to the beginning of the current fold
@@ -710,7 +714,8 @@ let g:rbpt_colorpairs = [
 
 " ag.nvim ack.vim {{{
 let g:ackprg = 'ag --vimgrep --smart-case'
-:command! -nargs=+ S :Ack --python '<args>'
+:command! -nargs=+ S :Ack '<args>'
+":command! -nargs=+ S :Ack --python '<args>'
 :command! -nargs=+ SS :Ack --swift '<args>'
 :command! -nargs=+ SA :Ack '<args>'
 ":command! -nargs=+ SP :Ag! --python <args>
@@ -840,24 +845,6 @@ function! Set( ... )
   execute 'set' .result
 endfunction
 com! -nargs=+ -complete=option Set call Set( <f-args> )
-
-function! SetMakePrg()
-    let cwd = getcwd()
-    if (&ft == 'python')
-        Set makeprg=py.test\ -vv\ -s\ --maxfail=1
-    elseif (&ft == 'scala')
-        Set makeprg=gradle compileScala
-    elseif (cwd == '/local/dev/Foundation')
-        Set makeprg=sudo ~rc/bin/buildit -project Foundation -release Monarch -archive -rootsDirectory ~/Desktop/ -dsymsInDstroot -configuration Debug /local/dev/Foundation/
-    elseif (cwd == '/local/dev/UserActivity')
-        Set makeprg=sudo ~rc/bin/buildit -release Monarch -project UserActivity -archive -rootsDirectory ~/Desktop/ -dsymsInDstroot -configuration Debug /local/dev/UserActivity/
-    elseif (cwd == '/local/dev/WebContentFilter')
-        Set makeprg=sudo ~rc/bin/buildit -release Monarch -project WebContentFilter -archive -rootsDirectory ~/Desktop/ -dsymsInDstroot -configuration Debug /local/dev/WebContentFilter
-    elseif (cwd == '/local/dev/aalgocpp')
-        set makeprg=./build.sh\ &&\ ./build/algorithmscpp
-    endif
-endfunction
-autocmd BufEnter * call SetMakePrg()
 " }}}
 
 " Highlight all instances of word under cursor, when idle.
