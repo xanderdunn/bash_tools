@@ -111,7 +111,7 @@ Plug 'tomlion/vim-solidity'
 " }}}
 
 " tmux {{{
-"Plug 'christoomey/vim-tmux-navigator'     " Navigate tmux panes and windows like vim splist
+Plug 'christoomey/vim-tmux-navigator'     " Navigate tmux panes and windows like vim splits
 "Plug 'benmills/vimux'                     " vim + tmux convenience commands
 Plug 'xolox/vim-session'                  " Save and restore vim state
 "Plug 'tmux-plugins/vim-tmux'              " Proper syntax highlighting and editing of tmux.conf
@@ -718,7 +718,7 @@ let g:ackprg = 'ag --vimgrep --smart-case'
 ":command! -nargs=+ S :Ack --python '<args>'
 :command! -nargs=+ SS :Ack --swift '<args>'
 :command! -nargs=+ SA :Ack '<args>'
-":command! -nargs=+ SP :Ag! --python <args>
+:command! -nargs=+ SP :Ag! --python '<args>'
 ":command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* <args>
 " }}}
 
