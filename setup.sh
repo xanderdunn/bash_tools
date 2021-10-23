@@ -39,7 +39,7 @@ sudo apt-get install -y htop # system perf monitoring
 sudo apt-get install -y unzip
 
 # Set timezone
-sudo timedatectl set-timezone America/Los_Angeles
+sudo timedatectl set-timezone America/New_York
 
 add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
@@ -91,12 +91,14 @@ ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 
 # Git Setup
 git config --global user.name "Xander Dunn"
-git config --global user.email "xander@praxispioneering.com"
+git config --global user.email "business@xander.ai"
 git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 
 # Install Node.js, used by neovim coc.nvim plugin
-curl -sL install-node.now.sh | sudo bash
+# curl -sL install-node.now.sh | sudo bash
 # nvim +CocInstall coc-python
+
+sudo apt-get install -y mosh
 
 sudo apt autoremove

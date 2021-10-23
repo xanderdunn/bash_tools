@@ -11,7 +11,7 @@ Plug 'altercation/vim-colors-solarized'     " Color scheme
 "Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
 "Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
+"Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
 Plug 'vim-syntastic/syntastic'              " Synchronous linting for R and Swift
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
