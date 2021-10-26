@@ -16,7 +16,7 @@ Plug 'vim-syntastic/syntastic'              " Synchronous linting for R and Swif
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
-"Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
+Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
 Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 
@@ -203,6 +203,7 @@ endif
 
 " Spell Check
 autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.txt.gpg setlocal spell
 
 " History
 "set nobackup		" prevent the ~ backup files from appearing on the filesystem
@@ -874,6 +875,8 @@ endfunction
 autocmd BufReadPre,FileReadPre *.gpg set noswapfile
 autocmd BufReadPre,FileReadPre *.gpg set nobackup
 autocmd BufReadPre,FileReadPre *.gpg set noundofile
+let g:GPGPreferArmor=1
+let g:GPGDefaultRecipients=["mykey1@mykey1.com"]
 
 "function! SetAutoSave()
    "if &ft =~ 'gpg'
