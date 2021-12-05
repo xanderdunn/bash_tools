@@ -11,7 +11,7 @@ Plug 'altercation/vim-colors-solarized'     " Color scheme
 "Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
 "Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
-"Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
 Plug 'vim-syntastic/syntastic'              " Synchronous linting for R and Swift
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
@@ -146,8 +146,9 @@ call plug#end()
 " }}}
 
 " UI {{{
-colorscheme solarized
 set background=dark
+let g:solarized_termtrans = 1
+colorscheme solarized
 " Make the gutter background the same color as the text area's background
 let g:gitgutter_override_sign_column_highlight = 0
 set signcolumn=yes
