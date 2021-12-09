@@ -44,3 +44,7 @@ alias devenv='export CUDA_VISIBLE_DEVICES=""; wandb off'
 # alias gscopypreds="gsutil -m cp predictions/* gs://praxis-data-plane/xander/"
 # }}} 
 
+# nvm node.js version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"

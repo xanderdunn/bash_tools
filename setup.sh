@@ -31,6 +31,7 @@ function create_dir_if_not_exist {
 # curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 
 # Install killall
+sudo apt update
 sudo apt-get install -y psmisc silversearcher-ag
 sudo apt-get install -y dbus # Required for timedatectl and missing on some GCP instances
 # sudo apt-get install -y postgresql-client # psql
@@ -91,7 +92,7 @@ ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 
 # Git Setup
 git config --global user.name "Xander Dunn"
-git config --global user.email "business@xander.ai"
+git config --global user.email "xander.dunn@avalabs.org"
 git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 
@@ -100,5 +101,11 @@ git config --global core.editor "nvim"
 # nvim +CocInstall coc-python
 
 sudo apt-get install -y mosh
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+chmod +x ~/.nvm/nvm.sh
+source ~/.bashrc
+nvm install 16
+nvm use 16
 
 sudo apt autoremove
