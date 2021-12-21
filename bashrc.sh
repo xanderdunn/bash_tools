@@ -48,3 +48,29 @@ alias devenv='export CUDA_VISIBLE_DEVICES=""; wandb off'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+alias 0='tmux attach -t 0'
+alias 1='tmux attach -t 1'
+alias 2='tmux attach -t 2'
+alias 3='tmux attach -t 3'
+alias 4='tmux attach -t 4'
+alias 5='tmux attach -t 5'
+alias 6='tmux attach -t 6'
+alias 7='tmux attach -t 7'
+alias 8='tmux attach -t 8'
+alias 9='tmux attach -t 9'
+
+function searche () {
+    if [ "$#" -eq 1 ]
+    then    # Only search string specified, so search through the entire system
+        for i in "${folders[@]}"
+        do
+            find "$i" -name "$1" -print 2>/dev/null
+        done
+    elif [ "$#" -eq 2 ]
+    then    # Search the given directory for the given string
+        find "$1" -name "$2" -print 2>/dev/null
+    else
+        echo "This is a bash alias.  You must at least specify what string to search for."
+    fi
+}
