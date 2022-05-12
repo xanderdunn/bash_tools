@@ -18,7 +18,9 @@ Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
-Plug 'kenn7/vim-arsync'                     " Async rsync on file save
+"Plug 'kenn7/vim-arsync'                     " Async rsync on file save
+
+nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
 
 " R
 "Plug 'jalvesaq/Nvim-R'
@@ -782,7 +784,7 @@ autocmd BufReadPost *
   \   exe "normal! g`\"" |
   \ endif
 
-cnoreabbrev up ARsyncUp
+"cnoreabbrev up ARsyncUp
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
