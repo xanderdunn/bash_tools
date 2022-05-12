@@ -52,10 +52,9 @@ if ["$DISTRO" == "Debian"]; then
     add_line_to_file_if_missing "deb http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
     add_line_to_file_if_missing "deb-src http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
 elif ["$DISTRO" == "Ubuntu"]; then
-    sudo add-apt-repository ppa:neovim-ppa/unstable
-    #udo add-apt-repository ppa:neovim-ppa/unstablesudo add-apt-repository ppa:neovim-ppa/stable
-   sudo apt-get update
-    sudo apt-get install neovim
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable
+    sudo apt-get update
+    sudo apt-get install -y neovim
 else
     sudo apt-get install -y neovim
 fi
