@@ -18,12 +18,18 @@ Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
+Plug 'rust-lang/rust.vim'
 "Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 
 nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
 
 " R
 "Plug 'jalvesaq/Nvim-R'
+
+" Rust {{{
+syntax enable
+let g:rust_fold = 2
+" }}}
 
 " JavaScript {{{
 "Plug 'pangloss/vim-javascript' " Improved JavaScript indentation and folding
@@ -522,6 +528,9 @@ function! SetFoldMethod()
         "setlocal foldlevel=0
     elseif &ft =~ 'cpp'
         setlocal foldmethod=indent
+    elseif &ft =~ 'rust'
+        setlocal foldmethod=indent
+        setlocal foldlevel=1
     else
         set foldcolumn=0        " Something is trying to set foldcolumn=3 for .m objc files.  Override it.
         set foldmethod=syntax

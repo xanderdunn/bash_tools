@@ -98,7 +98,13 @@ git config --global core.editor "nvim"
 
 # Install Node.js, used by neovim coc.nvim plugin
 # curl -sL install-node.now.sh | sudo bash
+
 # nvim +CocInstall coc-python
+
+# For rust support in coc.nvim:
+curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
+rustup component add rls rust-analysis rust-src
+# :CocInstall coc-rls
 
 sudo apt-get install -y mosh
 
