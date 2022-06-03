@@ -29,6 +29,7 @@ nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
 " Rust {{{
 syntax enable
 let g:rust_fold = 2
+let g:rustfmt_autosave = 1
 " }}}
 
 " JavaScript {{{
@@ -915,3 +916,4 @@ imap <C-Y> <c-o>:call yapf#YAPF()<cr>
 " TODO: Stop the folds from collapsing when running YAPF
 " TODO: Learn how to edit all instances of a variable. This might help:
 " https://github.com/neoclide/coc.nvim/wiki/Multiple-cursors-support
+" To get in-line errors in Rust: sudo apt install protobuf-compiler, rustup component add rls rust-analysis rust-src, in nvim :CocInstall coc-rls
