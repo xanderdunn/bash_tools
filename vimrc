@@ -12,7 +12,7 @@ Plug 'altercation/vim-colors-solarized'     " Color scheme
 "Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
 "Plug 'benekastah/neomake'                   " Asynchronous errors, warnings, and style checking using neovim async client/server plugin feature
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense in-line hinting and errors
-Plug 'vim-syntastic/syntastic'              " Synchronous linting for R and Swift
+"Plug 'vim-syntastic/syntastic'              " Synchronous linting for R and Swift
 Plug 'airblade/vim-rooter'                  " Change neovim's working directory to the project's root directory based on git root
 Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
@@ -332,8 +332,8 @@ inoremap <C-U> <C-G>u<C-U>
 " Jump to next and previous items in quickfix list
 " Having either of these shortcuts enabled breaks selecting items in the quickfix list by
 " pressing Enter
-nnoremap <leader>j :cn<cr>
-nnoremap <leader>k :cp<cr>
+"nnoremap <leader>j :cn<cr>
+"nnoremap <leader>k :cp<cr>
 
 " tmux navigator
 noremap <silent> <c-/> :TmuxNavigatePrevious<cr>
@@ -406,8 +406,12 @@ function! ShowDocumentation()
 endfunction
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]g <Plug>(coc-diagnostic-next)
+try
+    nmap <silent> <leader>j :call CocAction('diagnosticNext')<cr>
+    nmap <silent> <leader>k :call CocAction('diagnosticPrevious')<cr>
+endtry
 
 augroup mygroup
   autocmd!
