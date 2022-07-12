@@ -19,6 +19,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
 Plug 'rust-lang/rust.vim'
+Plug 'github/copilot.vim'
 "Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 
 nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
