@@ -128,7 +128,7 @@ Plug 'xolox/vim-session'                  " Save and restore vim state
 " }}}
 
 " Go {{{
-"Plug 'fatih/vim-go', {'for': 'go'}          " Autocompletion, syntax highlighting, etc.
+Plug 'fatih/vim-go', {'for': 'go'}          " Autocompletion, syntax highlighting, etc.
 " }}}
 
 " Markdown {{{
