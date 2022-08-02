@@ -182,6 +182,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " General Settings
 set visualbell                  " No bell
