@@ -103,10 +103,11 @@ git config --global core.editor "nvim"
 
 # For rust support in coc.nvim:
 curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
 rustup component add rls rust-analysis rust-src
 # :CocInstall coc-rls
 
-sudo apt-get install -y mosh
+# sudo apt-get install -y mosh
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 chmod +x ~/.nvm/nvm.sh
