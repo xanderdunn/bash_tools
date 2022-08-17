@@ -105,7 +105,7 @@ git config --global core.editor "nvim"
 curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
 rustup component add rls rust-analysis rust-src
-# :CocInstall coc-rls
+# :CocInstall coc-rust-analyzer
 
 # sudo apt-get install -y mosh
 
