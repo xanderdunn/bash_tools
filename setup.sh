@@ -91,6 +91,10 @@ create_dir_if_not_exist ~/.config/yapf
 ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 
 # Git Setup
+# Install latest release version of git
+sudo add-apt-repository ppa:git-core/ppa -y
+sudo apt-get upgrade -y
+# Config
 git config --global user.name "Xander Dunn"
 git config --global user.email "xander.dunn@avalabs.org"
 git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
