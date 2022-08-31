@@ -100,6 +100,7 @@ git config --global user.name "Xander Dunn"
 git config --global user.email "xander.dunn@avalabs.org"
 git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
+git config --global --add --bool push.autoSetupRemote true
 
 # Install Node.js, used by neovim coc.nvim plugin
 # curl -sL install-node.now.sh | sudo bash
