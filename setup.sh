@@ -93,6 +93,7 @@ ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 # Git Setup
 # Install latest release version of git
 sudo add-apt-repository ppa:git-core/ppa -y
+sudo apt-get update
 sudo apt-get upgrade -y
 # Config
 git config --global user.name "Xander Dunn"
