@@ -30,8 +30,11 @@ function create_dir_if_not_exist {
 # The NVIDIA registry GPG key is outdated by default on Google Deep Learning VMs
 # curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 
-# Install killall
+# Upgrade all Ubuntu packages
 sudo apt update
+sudo apt upgrade
+
+# Install killall
 sudo apt-get install -y psmisc silversearcher-ag
 sudo apt-get install -y dbus # Required for timedatectl and missing on some GCP instances
 # sudo apt-get install -y postgresql-client # psql
