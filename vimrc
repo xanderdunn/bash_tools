@@ -18,8 +18,8 @@ Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
-Plug 'rust-lang/rust.vim'
-Plug 'github/copilot.vim'
+"Plug 'rust-lang/rust.vim'
+"Plug 'github/copilot.vim'
 "Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 
 nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
@@ -128,7 +128,7 @@ Plug 'xolox/vim-session'                  " Save and restore vim state
 " }}}
 
 " Go {{{
-Plug 'fatih/vim-go', {'for': 'go'}          " Autocompletion, syntax highlighting, etc.
+"Plug 'fatih/vim-go', {'for': 'go'}          " Autocompletion, syntax highlighting, etc.
 " }}}
 
 " Markdown {{{
@@ -140,7 +140,7 @@ Plug 'godlygeek/tabular'
 " Xcode functionality {{{
 Plug 'ctrlpvim/ctrlp.vim'                   " quick search bar
 Plug 'FelikZ/ctrlp-py-matcher'              " faster ctrlp index searcher
-Plug 'b4winckler/vim-objc'                  " Better Obj-C indenting
+"Plug 'b4winckler/vim-objc'                  " Better Obj-C indenting
 "Plug 'SirVer/ultisnips'                     " code snippets
 "Plug 'eraserhd/vim-ios'                     " .h <-> .m switching and project build
 "Plug 'Valloric/YouCompleteMe'               " code completion
@@ -150,7 +150,7 @@ Plug 'qstrahl/vim-matchmaker'               " Highlight the term under the curso
 Plug 'xolox/vim-misc'                       " Dependency for vim-easy-tags
 Plug 'xolox/vim-easytags'                   " Automatically update exuberant ctags for syntax highlighting of user-defined variables
 "Plug 'toyamarinyon/vim-swift'               " Swift syntax and indenting
-Plug 'keith/swift.vim'
+"Plug 'keith/swift.vim'
 " }}}
 call plug#end()
 " }}}
@@ -169,10 +169,11 @@ highlight SignColumn ctermbg=None
 " Check vim's Python version: :python import sys; print(sys.version)
 " :echo has("python")
 let s:uname = system("uname -s")
-if s:uname == "Darwin"
-    let g:python_host_prog = '/usr/local/anaconda3/envs/python2/bin/python'
-    let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
-endif
+"if s:uname == "Darwin"
+    "let g:python_host_prog = '/usr/local/anaconda3/envs/python2/bin/python'
+    "let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
+"endif
+let g:python3_host_prog = '/opt/homebrew/bin/python3.11'
 set clipboard+=unnamedplus
 set nocompatible " Use vim settings
 set modelines=0	" Prevent security hole
@@ -924,3 +925,5 @@ imap <C-Y> <c-o>:call yapf#YAPF()<cr>
 " TODO: Learn how to edit all instances of a variable. This might help:
 " https://github.com/neoclide/coc.nvim/wiki/Multiple-cursors-support
 " To get in-line errors in Rust: sudo apt install protobuf-compiler, rustup component add rls rust-analysis rust-src, in nvim :CocInstall coc-rls
+" https://github.com/fannheyward/coc-pyright
+"     :CocInstall coc-pyright
