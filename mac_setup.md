@@ -1,7 +1,11 @@
 # macOS Settings
 - Check for system update
 - Enable Lockdown Mode in Settings and reboot
+- Set keyboard shortcut Spotlight to Control + Space
 - Set Caps Lock key to Esc
+- Set bottom right hot corner to Mission Control
+- Set Dock to left side and auto hide
+- Settings -> Desktop and Dock -> Mission Control -> disable Automatically rearrange Spaces
 - Enable Night Shift and max out the warmth
 - Set key repeat wait to min and key repeat rate to max
 - Open FaceTime and Messages and sign out of both
@@ -53,6 +57,14 @@
     - Open the consolas.ttf font in Google Drive/Dropbox/config/ and Install it
     - Profiles -> Text -> Font -> Consolas, then choose font-size 14
     - Now open a new iTerm tab and re-open nvim and it should have the correct colors
+- In nvim
+    - `:CocInstall coc-pyright`
+    - `:CocConfig` and put in:
+```json
+{
+    "python.pythonPath": "/opt/homebrew/bin/python3.11"
+}
+  ```
 
 # Setup Python dev
 - `pip3 install numpy pandas`
