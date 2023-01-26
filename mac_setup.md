@@ -20,7 +20,7 @@
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 - `sudo vim /etc/shell` and add the line at the end `/opt/homebrew/bin/bash`
 - `chsh -s /opt/homebrew/bin/bash`
-- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop`
+- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac`
     - openssh is needed to be able to use _sk ssh keys with Yubikey to clone bash_tools
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/profile ~/.profile`
 - Now open iTerm
@@ -51,6 +51,9 @@
 - git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 - git config --global core.editor "nvim"
 - git config --global --add --bool push.autoSetupRemote true
+- git config --global commit.gpgsign true
+- You should now be able to GPG sign: `echo "test" | gpg --clearsign`
+    - Debug GPG signing [here](https://drive.google.com/drive/u/0/search?q=yubieky)
 - iTerm2 -> Settings -> 
     - Profiles -> Other Actions -> Import JSON Profile -> . Select the new one and set as default.
     - Profiles -> Colors -> Color Presets -> Solarized Dark
@@ -68,4 +71,3 @@
 
 # Setup Python dev
 - `pip3 install numpy pandas`
-
