@@ -15,6 +15,7 @@
 - Settings -> Network -> Firewall, turn it on
 - Security and Privacy -> Apple advertising -> Turn off personalized ads, make sure File Vault is on
 - Open Notes app to start syncing iCloud notes
+- Settings -> Lock Screen -> Require password after screen saver begins -> Immediately
 
 # In Terminal.app, setup iTerm
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
