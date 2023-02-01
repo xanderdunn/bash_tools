@@ -18,12 +18,13 @@
 - Settings -> Lock Screen -> Require password after screen saver begins -> Immediately
 - In TextEdit, set the default to open a plain text document rather than rich text
 - In Notes, set the default new note to start with Body rather than Title
+- Turn on Private Relay
 
 # In Terminal.app, setup iTerm
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 - `sudo vim /etc/shell` and add the line at the end `/opt/homebrew/bin/bash`
 - `chsh -s /opt/homebrew/bin/bash`
-- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac pwgen`
+- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac pwgen the_silver_searcher`
     - openssh is needed to be able to use _sk ssh keys with Yubikey to clone bash_tools
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/profile ~/.profile`
 - Now open iTerm
