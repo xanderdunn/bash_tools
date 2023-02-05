@@ -19,6 +19,9 @@
 - In TextEdit, set the default to open a plain text document rather than rich text
 - In Notes, set the default new note to start with Body rather than Title
 - Turn on Private Relay
+- Add extensions to Brave
+    - [Distraction Free YouTube](https://chrome.google.com/webstore/detail/df-tube-distraction-free/mjdepdfccjgcndkmemponafgioodelna?hl=en)
+    - [Markdown Here](https://chrome.google.com/webstore/detail/markdown-here/elifhakcjgalahccnjkneoccemfahfoa?hl=en)
 
 # In Terminal.app, setup iTerm
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
