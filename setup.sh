@@ -108,12 +108,12 @@ git config --global --add --bool push.autoSetupRemote true
 # Install Node.js, used by neovim coc.nvim plugin
 # curl -sL install-node.now.sh | sudo bash
 
-# nvim +CocInstall coc-python
+# nvim +CocInstall coc-pyright
 
 # For rust support in coc.nvim:
-curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
-source "$HOME/.cargo/env"
-rustup component add rls rust-analysis rust-src
+# curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
+# source "$HOME/.cargo/env"
+# rustup component add rls rust-analysis rust-src
 # :CocInstall coc-rust-analyzer
 
 # sudo apt-get install -y mosh
