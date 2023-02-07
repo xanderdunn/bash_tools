@@ -49,26 +49,12 @@ add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 
 # Install neovim
-# DISTRO=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
-# if ["$DISTRO" == "Debian"]; then
-#     add_line_to_file_if_missing "APT::Default-Release \"stretch\";" /etc/apt/apt.conf.d/99defaultrelease true
-#     add_line_to_file_if_missing "deb http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
-#     add_line_to_file_if_missing "deb-src http://deb.debian.org/debian unstable main contrib" /etc/apt/sources.list true
-# elif ["$DISTRO" == "Ubuntu"]; then
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt-get update
 sudo apt-get install -y neovim
-# else
-#     sudo apt-get install -y neovim
-# fi
 sudo apt-get update
-# if ["$DISTRO" == "Debian"]; then
-#     sudo apt-get install -t unstable -y python3-neovim
-# else
-sudo apt install -y python3-neovim
-# fi
+sudo apt-get install -y python3-neovim
 sudo apt-get install -y exuberant-ctags
-# sudo apt-get install -y postgresql-client
 create_dir_if_not_exist ~/.config
 create_dir_if_not_exist ~/.config/nvim
 create_dir_if_not_exist ~/.config/nvim/backup
@@ -77,6 +63,8 @@ create_dir_if_not_exist ~/.config/nvim/swap
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
 nvim +PlugInstall
+pip3 install neovim # dependency for neovim plugin
+pip3 install yapf # dependency for yapf neovim plugin
 
 # Python libraries
 # TODO: Don't install these if they're already installed

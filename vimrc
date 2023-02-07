@@ -173,7 +173,9 @@ let s:uname = system("uname -s")
     "let g:python_host_prog = '/usr/local/anaconda3/envs/python2/bin/python'
     "let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
 "endif
-let g:python3_host_prog = '/opt/homebrew/bin/python3.11'
+if has('macunix')
+    let g:python3_host_prog = '/opt/homebrew/bin/python3.11'
+endif
 set clipboard+=unnamedplus
 set nocompatible " Use vim settings
 set modelines=0	" Prevent security hole
