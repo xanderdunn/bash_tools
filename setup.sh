@@ -111,5 +111,6 @@ chmod +x ~/.nvm/nvm.sh
 source ~/.bashrc
 # nvm install 16
 # nvm use 16
+# npm install -g neovim
 
 sudo apt autoremove
