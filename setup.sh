@@ -63,7 +63,7 @@ create_dir_if_not_exist ~/.config/nvim/swap
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
 nvim +PlugInstall
-pip3 install neovim # dependency for neovim plugin
+pip3 install pynvim # dependency for neovim plugin
 pip3 install yapf # dependency for yapf neovim plugin
 
 # Python libraries
