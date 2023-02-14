@@ -49,10 +49,11 @@ add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 
 # Install neovim
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install -y neovim
-sudo apt-get update
+sudo snap install nvim --classic # This should install v0.8.2, I've had trouble with the unstable PPA which install 0.9-dev
+# sudo add-apt-repository -y ppa:neovim-ppa/unstable
+# sudo apt-get update
+# sudo apt-get install -y neovim
+# sudo apt-get update
 sudo apt-get install -y python3-neovim
 sudo apt-get install -y exuberant-ctags
 create_dir_if_not_exist ~/.config
@@ -109,8 +110,8 @@ git config --global --add --bool push.autoSetupRemote true
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 chmod +x ~/.nvm/nvm.sh
 source ~/.bashrc
-# nvm install 16
-# nvm use 16
+# nvm install 18
+# nvm use 18
 # npm install -g neovim
 
 sudo apt autoremove
