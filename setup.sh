@@ -64,6 +64,7 @@ create_dir_if_not_exist ~/.config/nvim/swap
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
 nvim +PlugInstall
+sudo apt-get install -y python3-pip
 pip3 install pynvim # dependency for neovim plugin
 pip3 install yapf # dependency for yapf neovim plugin
 
@@ -84,6 +85,7 @@ ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 
 # Git Setup
 # Install latest release version of git
+sudo apt-get instally -y software-common-properties
 sudo add-apt-repository ppa:git-core/ppa -y
 sudo apt-get update
 sudo apt-get upgrade -y
