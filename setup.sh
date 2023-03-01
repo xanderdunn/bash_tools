@@ -48,6 +48,8 @@ sudo timedatectl set-timezone America/New_York
 add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 
+sudo apt-get install -y bash-completion
+
 # Install neovim
 sudo snap install nvim --classic # This should install v0.8.2, I've had trouble with the unstable PPA which install 0.9-dev
 # sudo add-apt-repository -y ppa:neovim-ppa/unstable
@@ -96,11 +98,6 @@ git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 git config --global --add --bool push.autoSetupRemote true
 
-# Install Node.js, used by neovim coc.nvim plugin
-# curl -sL install-node.now.sh | sudo bash
-
-# nvim +CocInstall coc-pyright
-
 # For rust support in coc.nvim:
 # curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
 # source "$HOME/.cargo/env"
@@ -112,6 +109,9 @@ git config --global --add --bool push.autoSetupRemote true
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 chmod +x ~/.nvm/nvm.sh
 source ~/.bashrc
+
+### RUN MANUALLY BY HAND:
+# nvim, then :CocInstall coc-pyright
 # nvm install 18
 # nvm use 18
 # npm install -g neovim
