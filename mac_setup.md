@@ -27,7 +27,7 @@
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 - `sudo vim /etc/shell` and add the line at the end `/opt/homebrew/bin/bash`
 - `chsh -s /opt/homebrew/bin/bash`
-- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac pwgen the_silver_searcher`
+- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac pwgen the_silver_searcher bash-completion`
     - openssh is needed to be able to use _sk ssh keys with Yubikey to clone bash_tools
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/profile ~/.profile`
 - Now open iTerm
