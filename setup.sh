@@ -31,8 +31,8 @@ function create_dir_if_not_exist {
 # curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 
 # Upgrade all Ubuntu packages
-sudo apt update
-sudo apt upgrade
+sudo apt-get update
+sudo apt-get upgrade
 
 # Install killall
 sudo apt-get install -y psmisc silversearcher-ag
@@ -87,7 +87,7 @@ ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 
 # Git Setup
 # Install latest release version of git
-sudo apt-get instally -y software-common-properties
+sudo apt-get install -y software-properties-common
 sudo add-apt-repository ppa:git-core/ppa -y
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -111,9 +111,9 @@ chmod +x ~/.nvm/nvm.sh
 source ~/.bashrc
 
 ### RUN MANUALLY BY HAND:
-# nvim, then :CocInstall coc-pyright
 # nvm install 18
 # nvm use 18
 # npm install -g neovim
+# nvim, then :CocInstall coc-pyright
 
-sudo apt autoremove
+sudo apt-get autoremove
