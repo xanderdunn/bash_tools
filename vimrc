@@ -18,7 +18,7 @@ Plug 'chrisbra/csv.vim'
 "Plug 'vim-scripts/vim-auto-save'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
-"Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim' " Doesn't appear to be useful when using coc-rust-analyzer
 Plug 'github/copilot.vim'
 "Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 

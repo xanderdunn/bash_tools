@@ -111,9 +111,16 @@ chmod +x ~/.nvm/nvm.sh
 source ~/.bashrc
 
 ### RUN MANUALLY BY HAND:
+# Python
 # nvm install 18
 # nvm use 18
 # npm install -g neovim
 # nvim, then :CocInstall coc-pyright
+
+# Rust
+# rustup component add rust-analyzer
+# ln -s ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer ~/.cargo/bin/
+# :CocInstall coc-rust-analyzer
+# Open a rust file and it will ask to download rust-analyzer, say yes
 
 sudo apt-get autoremove
