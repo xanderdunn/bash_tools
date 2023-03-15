@@ -123,4 +123,7 @@ source ~/.bashrc
 # :CocInstall coc-rust-analyzer
 # Open a rust file and it will ask to download rust-analyzer, say yes
 
+# Setup clipboard over ssh:
+# https://stackoverflow.com/a/73531771/529743
+
 sudo apt-get autoremove

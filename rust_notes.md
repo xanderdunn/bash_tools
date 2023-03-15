@@ -115,9 +115,11 @@ let string_slice = string.as_str();
 - [Fixing Python Performance with Rust](https://blog.sentry.io/2016/10/19/fixing-python-performance-with-rust/)
 - [Rewriting the heart of our sync engine](https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine)
 - [npm core written in Rust](https://www.infoq.com/news/2019/03/rust-npm-performance/)
+- [Design Patterns](https://rust-unofficial.github.io/patterns/patterns/index.html)
 
 ## Code Cleanup
 After writing a project, these are things I look for to improve. These are things not caught by `cargo check`.
 - Look for uses of `clone` and see how many of them you can replace by simply taking a reference `&T` into that function rather than a move.
 - Look for `assert!` and `unwrap` and replace them with returning `Result` types. A good way to replace an `assert!` with a Result is: `(condition).then_some(()).ok_or(err)`
 - Make sure all locks are acquired within the implementation of that `struct` itself, not outside of it. Functions that acquire locks should be minimal.
+- Look for places where you're passing `&String` to a function to replace it with `&str`, or replace `&Vec<T>` with `&[T]`. See more [here](https://rust-unofficial.github.io/patterns/idioms/coercion-arguments.html)
