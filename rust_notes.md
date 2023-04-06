@@ -120,6 +120,6 @@ let string_slice = string.as_str();
 ## Code Cleanup
 After writing a project, these are things I look for to improve. These are things not caught by `cargo check`.
 - Look for uses of `clone` and see how many of them you can replace by simply taking a reference `&T` into that function rather than a move.
-- Look for `assert!` and `unwrap` and replace them with returning `Result` types. A good way to replace an `assert!` with a Result is: `(condition).then_some(()).ok_or(err)`
+- Look for `assert!`, `unwrap`, and `expect` and replace them with returning `Result` types. A good way to replace an `assert!` with a Result is: `(condition).then_some(()).ok_or(err)`.
 - Make sure all locks are acquired within the implementation of that `struct` itself, not outside of it. Functions that acquire locks should be minimal.
 - Look for places where you're passing `&String` to a function to replace it with `&str`, or replace `&Vec<T>` with `&[T]`. See more [here](https://rust-unofficial.github.io/patterns/idioms/coercion-arguments.html)
