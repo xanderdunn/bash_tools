@@ -51,6 +51,7 @@ sudo apt-get install -y bash-completion
 # Install neovim
 wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
 sudo apt-get install ./nvim-linux64.deb
+rm nvim-linux64.deb
 sudo apt-get install -y python3-neovim
 sudo apt-get install -y exuberant-ctags
 create_dir_if_not_exist ~/.config
