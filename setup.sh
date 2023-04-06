@@ -27,12 +27,10 @@ function create_dir_if_not_exist {
         mkdir "$1"
     fi
 }
-# The NVIDIA registry GPG key is outdated by default on Google Deep Learning VMs
-# curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 
 # Upgrade all Ubuntu packages
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
 # Install killall
 sudo apt-get install -y psmisc silversearcher-ag
@@ -51,11 +49,8 @@ add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 sudo apt-get install -y bash-completion
 
 # Install neovim
-sudo snap install nvim --classic # This should install v0.8.2, I've had trouble with the unstable PPA which install 0.9-dev
-# sudo add-apt-repository -y ppa:neovim-ppa/unstable
-# sudo apt-get update
-# sudo apt-get install -y neovim
-# sudo apt-get update
+wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+sudo apt-get install ./nvim-linux64.deb
 sudo apt-get install -y python3-neovim
 sudo apt-get install -y exuberant-ctags
 create_dir_if_not_exist ~/.config
@@ -71,12 +66,6 @@ pip3 install pynvim # dependency for neovim plugin
 pip3 install yapf # dependency for yapf neovim plugin
 
 # Python libraries
-# TODO: Don't install these if they're already installed
-# sudo apt-get install -y python3-setuptools python3-distutils
-# sudo easy_install3 pip
-# pip3 install --user numpy pandas wandb scikit-learn tqdm pylint flake8 matplotlib Pillow tables ipython
-# pip3 install --user neovim jupytet PyQt5 # Dependencies for jupyter-vim
-# pip3 install --user --upgrade jedi # Update to show floating window docs from coc.nvim
 ln -sf ~/dev/bash_tools/pylintrc ~/.pylintrc
 ln -sf ~/dev/bash_tools/flake8 ~/.flake8
 ln -sf ~/dev/bash_tools/tmux.confg ~/.tmux.conf
@@ -97,31 +86,44 @@ git config --global user.email "xander@xander.ai"
 git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 git config --global --add --bool push.autoSetupRemote true
+git config --global commit.gpgsign true
+git config --global user.signingkey 1AD6223D5862AA18
+
+# Install GPG key for commit signing
+sudo apt-get install git-lfs
+git lfs install
+git lfs pull
+gpg --list-keys
+gpg --import pub_key.gpg
+gpg --list-keys
+sudo add_line_to_file_if_missing "StreamLocalBindUnlink yes" /etc/ssh/sshd_config
+sudo sshd -t
+sudo service sshd restart
+# TODO MANUALLY: Make sure this machine has an entry in your local ~/.ssh/config
+# Now you should be able to start a new SSH session with the machine and gpg --list-keys and gpg --list-secret-keys should both work
 
 # For rust support in coc.nvim:
-# curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
-# source "$HOME/.cargo/env"
-# rustup component add rls rust-analysis rust-src
-# :CocInstall coc-rust-analyzer
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+source "$HOME/.cargo/env"
+rustup component add rust-analyzer
 
 # sudo apt-get install -y mosh
 
+# Install Node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-chmod +x ~/.nvm/nvm.sh
-source ~/.bashrc
+# Set up NVM environment variables
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# Install Node.js v18 and set it as the active version
+nvm install 18
+nvm use 18
+# Install neovim globally
+npm install -g neovim
 
-### RUN MANUALLY BY HAND:
-# Python
-# nvm install 18
-# nvm use 18
-# npm install -g neovim
-# nvim, then :CocInstall coc-pyright
-
-# Rust
-# rustup component add rust-analyzer
-# ln -s ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer ~/.cargo/bin/
-# :CocInstall coc-rust-analyzer
-# Open a rust file and it will ask to download rust-analyzer, say yes
+# Install Coc extensions for Neovim
+nvim -c 'CocInstall coc-pyright'
+nvim -c 'CocInstall coc-rust-analyzer'
 
 # Setup clipboard over ssh:
 # https://stackoverflow.com/a/73531771/529743
