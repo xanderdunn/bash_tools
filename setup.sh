@@ -49,7 +49,7 @@ add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 sudo apt-get install -y bash-completion
 
 # Install neovim
-wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+wget -nc https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
 sudo apt-get install ./nvim-linux64.deb
 rm nvim-linux64.deb
 sudo apt-get install -y python3-neovim
