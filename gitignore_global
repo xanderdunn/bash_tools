@@ -99,3 +99,5 @@ scapegoat*
 *.mp4
 
 node_modules/
+lint.sh
+test.sh

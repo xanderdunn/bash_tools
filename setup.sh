@@ -97,7 +97,7 @@ git lfs pull
 gpg --list-keys
 gpg --import pub_key.gpg
 gpg --list-keys
-sudo add_line_to_file_if_missing "StreamLocalBindUnlink yes" /etc/ssh/sshd_config
+add_line_to_file_if_missing "StreamLocalBindUnlink yes" /etc/ssh/sshd_config true
 sudo sshd -t
 sudo service sshd restart
 # TODO MANUALLY: Make sure this machine has an entry in your local ~/.ssh/config
@@ -129,4 +129,4 @@ nvim -c 'CocInstall coc-rust-analyzer'
 # Setup clipboard over ssh:
 # https://stackoverflow.com/a/73531771/529743
 
-sudo apt-get autoremove
+sudo apt-get autoremove -y
