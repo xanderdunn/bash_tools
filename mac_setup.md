@@ -31,6 +31,7 @@
     - openssh is needed to be able to use _sk ssh keys with Yubikey to clone bash_tools
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/profile ~/.profile`
 - Now open iTerm
+- Load the file `/Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/iterm_profile_visible_selection.json` into iTerm profiles and set it as the default
 
 # In iTerm, setup neovim
 - AirDrop the _sk SSH private and public keys to your ~/.ssh/
