@@ -180,6 +180,20 @@ set clipboard+=unnamedplus
 set nocompatible " Use vim settings
 set modelines=0	" Prevent security hole
 
+" For iTerm cross-SSH copy and paste on Linux
+let g:clipboard = {
+\   'name': 'myClipboard',
+\   'copy': {
+\      '+': ['ttyup'],
+\      '*': ['ttyup'],
+\   },
+\   'paste': {
+\      '+': '+',
+\      '*': '*',
+\   },
+\   'cache_enabled': 0,
+\ }
+
 " All tabs are 4 spaces
 set expandtab
 set tabstop=4
