@@ -128,5 +128,7 @@ nvim -c 'CocInstall coc-rust-analyzer'
 
 # Setup clipboard over ssh:
 # https://stackoverflow.com/a/73531771/529743
+curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
+add_line_to_file_if_missing "export PATH=$PATH:~/.iterm2" ~/.bashrc false
 
 sudo apt-get autoremove -y
