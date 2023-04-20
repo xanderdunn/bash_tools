@@ -116,6 +116,7 @@ let string_slice = string.as_str();
 - [Rewriting the heart of our sync engine](https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine)
 - [npm core written in Rust](https://www.infoq.com/news/2019/03/rust-npm-performance/)
 - [Design Patterns](https://rust-unofficial.github.io/patterns/patterns/index.html)
+- [Modular Errors in Rust](https://sabrinajewson.org/blog/errors)
 
 ## Code Cleanup
 After writing a project, these are things I look for to improve. These are things not caught by `cargo check`.

@@ -181,18 +181,18 @@ set nocompatible " Use vim settings
 set modelines=0	" Prevent security hole
 
 " For iTerm cross-SSH copy and paste on Linux
-let g:clipboard = {
-\   'name': 'myClipboard',
-\   'copy': {
-\      '+': ['ttyup'],
-\      '*': ['ttyup'],
-\   },
-\   'paste': {
-\      '+': '+',
-\      '*': '*',
-\   },
-\   'cache_enabled': 0,
-\ }
+"let g:clipboard = {
+"\   'name': 'myClipboard',
+"\   'copy': {
+"\      '+': ['ttyup'],
+"\      '*': ['ttyup'],
+"\   },
+"\   'paste': {
+"\      '+': '+',
+"\      '*': '*',
+"\   },
+"\   'cache_enabled': 0,
+"\ }
 
 " All tabs are 4 spaces
 set expandtab
@@ -948,3 +948,7 @@ imap <C-Y> <c-o>:call yapf#YAPF()<cr>
 " To get in-line errors in Rust: sudo apt install protobuf-compiler, rustup component add rls rust-analysis rust-src, in nvim :CocInstall coc-rls
 " https://github.com/fannheyward/coc-pyright
 "     :CocInstall coc-pyright
+" To diagnose rust-analyzer problems:
+"     Set "rust-analyzer.trace.server": "messages" in :CocConfig and try :CocCommand workspace.showOutput rust-analyzer.
+" To configure Coc to format file on save:
+"        "coc.preferences.formatOnSaveFiletypes": ["rust"]
