@@ -76,3 +76,12 @@ function searche () {
         echo "This is a bash alias.  You must at least specify what string to search for."
     fi
 }
+
+function loop() {
+  local max_runs=$1
+  local command_to_run="${@:2}"
+
+  for i in $(seq 1 $max_runs); do
+    $command_to_run && echo "Run $i: Success" || { echo "Run $i: Failed"; break; }
+  done
+}
