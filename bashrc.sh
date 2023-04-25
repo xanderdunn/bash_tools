@@ -44,7 +44,7 @@ alias devenv='export CUDA_VISIBLE_DEVICES=""; wandb off'
 alias gpgtest='echo "test" | gpg --clearsign'
 alias gpgre="gpgconf --kill gpg-agent"
 # alias gscopypreds="gsutil -m cp predictions/* gs://praxis-data-plane/xander/"
-# }}} 
+# }}}
 
 # nvm node.js version manager
 export NVM_DIR="$HOME/.nvm"
@@ -77,11 +77,23 @@ function searche () {
     fi
 }
 
+# Usage: `loop n command`, for example `loop 10 sleep 1`
 function loop() {
   local max_runs=$1
   local command_to_run="${@:2}"
+  local start_time=$SECONDS
 
   for i in $(seq 1 $max_runs); do
-    $command_to_run && echo "Run $i: Success" || { echo "Run $i: Failed"; break; }
+    local current_time=$(date '+%Y-%m-%d %H:%M:%S')
+    if $command_to_run; then
+      local elapsed_time=$((SECONDS - start_time))
+      local hours=$((elapsed_time / 3600))
+      local minutes=$(( (elapsed_time % 3600) / 60 ))
+      local seconds=$((elapsed_time % 60))
+      printf "Run %d: Success - Current Time: %s - Elapsed Time: %02d:%02d:%02d\n" "$i" "$current_time" "$hours" "$minutes" "$seconds"
+    else
+      echo "Run $i: Failed"
+      break
+    fi
   done
 }

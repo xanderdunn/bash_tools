@@ -952,3 +952,11 @@ imap <C-Y> <c-o>:call yapf#YAPF()<cr>
 "     Set "rust-analyzer.trace.server": "messages" in :CocConfig and try :CocCommand workspace.showOutput rust-analyzer.
 " To configure Coc to format file on save:
 "        "coc.preferences.formatOnSaveFiletypes": ["rust"]
+" :CocConfig working on my Trainium machine:
+" {
+"     "rust-analyzer.cargo.extraEnv": { "CPATH": "/opt/aws/neuron/include", "LIBRARY_PATH": "/opt/aws/neuron/lib", "LD_LIBRARY_PATH": "/opt/aws/neuron/lib" },
+"     "rust-analyzer.trace.server": "messages",
+"     "coc.preferences.formatOnSaveFiletypes": ["rust", "python"],
+"     "rust-analyzer.cargo.buildScripts.overrideCommand": ["/home/ubuntu/.cargo/bin/cargo", "check", "--message-format=json", "--all-targets" , "--package", "xla", "--no-default-features", "--features", "trn"],
+"     "rust-analyzer.check.overrideCommand": ["/home/ubuntu/.cargo/bin/cargo", "check", "--message-format=json", "--all-targets" , "--package", "xla", "--no-default-features", "--features", "trn"]
+" }
