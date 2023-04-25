@@ -49,6 +49,7 @@ add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 sudo apt-get install -y bash-completion
 
 # Install neovim
+sudo apt-get install -y libfuse2
 wget -nc https://github.com/neovim/neovim/releases/download/v0.9.0/nvim.appimage
 chmod u+x nvim.appimage
 sudo mv nvim.appimage /usr/local/bin/nvim
