@@ -84,15 +84,17 @@ function loop() {
   local start_time=$SECONDS
 
   for i in $(seq 1 $max_runs); do
+    local success=$($command_to_run && echo "1" || echo "0")
+    local elapsed_time=$((SECONDS - start_time))
+    local hours=$((elapsed_time / 3600))
+    local minutes=$(( (elapsed_time % 3600) / 60 ))
+    local seconds=$((elapsed_time % 60))
     local current_time=$(date '+%Y-%m-%d %H:%M:%S')
-    if $command_to_run; then
-      local elapsed_time=$((SECONDS - start_time))
-      local hours=$((elapsed_time / 3600))
-      local minutes=$(( (elapsed_time % 3600) / 60 ))
-      local seconds=$((elapsed_time % 60))
+
+    if [[ $success == "1" ]]; then
       printf "Run %d: Success - Current Time: %s - Elapsed Time: %02d:%02d:%02d\n" "$i" "$current_time" "$hours" "$minutes" "$seconds"
     else
-      echo "Run $i: Failed"
+      printf "Run %d: Failed - Current Time: %s - Elapsed Time: %02d:%02d:%02d\n" "$i" "$current_time" "$hours" "$minutes" "$seconds"
       break
     fi
   done
