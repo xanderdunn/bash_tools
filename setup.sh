@@ -133,5 +133,13 @@ nvim -c 'CocInstall coc-rust-analyzer'
 # https://stackoverflow.com/a/73531771/529743
 curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 add_line_to_file_if_missing "export PATH=$PATH:~/.iterm2" ~/.bashrc false
+mkdir -p ~/.local/bin
+touch ~/.local/bin/ttyup
+chmod +x ~/.local/bin/ttyup
+text="#!/bin/bash
+parent() { awk '{print $4}' \"/proc/$1/stat\"; }
+leader() { awk '{print $6}' \"/proc/$1/stat\"; }
+it2copy > \"/proc/$(parent $(leader $$))/fd/0\""
+echo -e "$text" > ~/.local/bin/ttyup
 
 sudo apt-get autoremove -y
