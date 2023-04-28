@@ -758,11 +758,8 @@ let g:rbpt_colorpairs = [
 " ag.nvim ack.vim {{{
 let g:ackprg = 'ag --vimgrep --smart-case'
 :command! -nargs=+ S :Ack '<args>'
-":command! -nargs=+ S :Ack --python '<args>'
-:command! -nargs=+ SS :Ack --swift '<args>'
-:command! -nargs=+ SA :Ack '<args>'
-:command! -nargs=+ SP :Ag! --python '<args>'
-":command! -nargs=+ Sj :Ag! --ignore=*Test* --ignore=_* --ignore=*test* <args>
+:command! -nargs=+ SR :Ack --rust '<args>'
+:command! -nargs=+ SP :Ack --python '<args>'
 " }}}
 
 " UltiSnips {{{
