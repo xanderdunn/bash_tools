@@ -137,12 +137,13 @@ add_line_to_file_if_missing "export PATH=$PATH:~/.iterm2" ~/.bashrc false
 mkdir -p ~/.local/bin
 touch ~/.local/bin/ttyup
 chmod +x ~/.local/bin/ttyup
-text="#!/bin/bash
-parent() { awk '{print $4}' \"/proc/$1/stat\"; }
-leader() { awk '{print $6}' \"/proc/$1/stat\"; }
-it2copy > \"/proc/$(parent $(leader $$))/fd/0\""
-echo -e "$text" > ~/.local/bin/ttyup
+#text="#!/bin/bash
+#parent() { awk '{print $4}' \"/proc/$1/stat\"; }
+#leader() { awk '{print $6}' \"/proc/$1/stat\"; }
+#it2copy > \"/proc/$(parent $(leader $$))/fd/0\""
+#echo -e "$text" > ~/.local/bin/ttyup
 
 sudo apt-get autoremove -y
 
+echo "You'll need to copy paste the bash script to ~/.local/bin for iTerm clipboard passing to work."
 echo "Set your hostname with: sudo hostnamectl set-hostname <hostname>"
