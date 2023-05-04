@@ -102,3 +102,7 @@ function loop() {
     fi
   done
 }
+
+greprust() {
+  grep -r --include="*.rs" "$1" .
+}
