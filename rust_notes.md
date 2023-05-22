@@ -87,6 +87,11 @@ let string_slice = string.as_str();
 ## Types
 - `!` is the `Never` type and indicates that a function should never returns, such as if it should crash, or a function with an infinite loop that should never stop.
 - The newtype pattern is to define a struct with the type we want: `struct Hostname(String)` and now we can use this to differentiate hostnames from other `String`s: `fn connect(host: Hostname)`
+- Tools for getting around the Rust type system when necessary. For example, when trying to store heterogenous types such as `Tensor<D>` in a dynamic graph:
+    - Make an enum that holds the various different types
+    - Implement an object-safe Trait (does not support Copy and has no generic types) and take a `Box< dyn MyTrait>`
+    - Return a Box<dyn Any> and downcast it to a specific type at runtime
+    - After doing one of the above three options, you can then store the heterogeneous types in a Vec<> and refer to them elsewhere by index. These indices can be held in a single container and refer to one of the above three heterogeneous types.
 
 ### Algebraic Data Types
 - The type `()` is called [unit](https://doc.rust-lang.org/std/primitive.unit.html). A unit type has only one one value, compared to a bool which has two possible values, etc.
