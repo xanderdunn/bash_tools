@@ -5,7 +5,7 @@ This is good for an experienced programmer to get an overview of Rust, or to ref
 ## General
 - The exclamation point in something such as `println!()` indicates it's a macro, not that it destructive, unsafe, or mutating state. A macro returns code rather than values.
 - Rust is not object oriented. It does not support inheritance.
-- A closure is also known as an anonymous function or a lambda function
+- A closure is also known as an anonymous function or a lambda function. Read more about closures [here](https://hashrust.com/blog/a-guide-to-closures-in-rust/).
 - An underscore in a type, such as `Vec<_>` indicates that the compiler should infer the type
 - Binary `b011`, Hex: `0x12C`
 - `300_i32 as i8` returns 44, because the max `i8` is 127, so it wraps around twice and the remainder is 44.
