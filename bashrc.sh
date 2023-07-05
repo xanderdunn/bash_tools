@@ -41,7 +41,7 @@ alias untar='tar -xvzf'
 alias password="pwgen -s -y 30 1"
 alias vimrc="nvim ~/bash_tools/vimrc"
 alias devenv='export CUDA_VISIBLE_DEVICES=""; wandb off'
-alias gpgtest='echo "test" | gpg --clearsign'
+alias gpgtest='echo "test" | gpg --default-key 8E422DD598E6D7EA733FFE252B99B045C097795C --clearsign'
 alias gpgre="gpgconf --kill gpg-agent"
 # alias gscopypreds="gsutil -m cp predictions/* gs://praxis-data-plane/xander/"
 # }}}

@@ -58,12 +58,6 @@ Reader ...........: Yubico YubiKey OTP FIDO CCID
     - `gpg/card> 1`
     - The default password is `123456`
     - The same rules apply as the admin password, except that getting it wrong three times does not destroy the card.
-- Set the touch policy of the YubiKey:
-    - `ykman openpgp keys set-touch enc cached`
-    - `ykman openpgp keys set-touch aut cached`
-    - `ykman openpgp keys set-touch sig cached`
-    - We choose this touch policy to prevent a disaster scenario such as [this](https://matrix.org/blog/2019/05/08/post-mortem-and-remediations-for-apr-11-security-incident#ssh-config-should-be-hardened-disabling-unnecessary-options) where an intruder silently uses your SSH key during the PIN cache period without your knowledge.
-    - **Please set this before proceeding, because setting it later will invalidate the keys**
 - On macOS and Ubuntu 20.04+ Set the type of GPG keys we will be creating
     - `gpg/card> key-attr`
     - **You will receive SIX prompts, choosing ECC and Curve 25519 for each of them:**
@@ -88,6 +82,12 @@ Reader ...........: Yubico YubiKey OTP FIDO CCID
 pub   ed25519 2022-04-25 [SC] [expires: 2022-07-24]
       4F6430E08EF00050EA458DC2BD5B086AE03EB5B0
 ```
+- Set the touch policy of the YubiKey:
+    - `ykman openpgp keys set-touch enc cached`
+    - `ykman openpgp keys set-touch aut cached`
+    - `ykman openpgp keys set-touch sig cached`
+    - `ykman openpgp keys set-touch att cached`
+    - We choose this touch policy to prevent a disaster scenario such as [this](https://matrix.org/blog/2019/05/08/post-mortem-and-remediations-for-apr-11-security-incident#ssh-config-should-be-hardened-disabling-unnecessary-options) where an intruder silently uses your SSH key during the PIN cache period without your knowledge.
 - Export the public key: `gpg --armor --export 4F6430E08EF00050EA458DC2BD5B086AE03EB5B0 > gpg.pub`
 - [Add this GPG key in your GitHub settings](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account) and note the `Key ID: 01BECFA3C1AE191D15` value it shows, use it in the next step
 - Setup git commit GPG signing
