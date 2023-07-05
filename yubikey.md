@@ -59,9 +59,9 @@ Reader ...........: Yubico YubiKey OTP FIDO CCID
     - The default password is `123456`
     - The same rules apply as the admin password, except that getting it wrong three times does not destroy the card.
 - Set the touch policy of the YubiKey:
-    - `ykman openpgp keys set-touch enc Fixed`
-    - `ykman openpgp keys set-touch aut Fixed`
-    - `ykman openpgp keys set-touch sig Fixed`
+    - `ykman openpgp keys set-touch enc cached`
+    - `ykman openpgp keys set-touch aut cached`
+    - `ykman openpgp keys set-touch sig cached`
     - We choose this touch policy to prevent a disaster scenario such as [this](https://matrix.org/blog/2019/05/08/post-mortem-and-remediations-for-apr-11-security-incident#ssh-config-should-be-hardened-disabling-unnecessary-options) where an intruder silently uses your SSH key during the PIN cache period without your knowledge.
     - **Please set this before proceeding, because setting it later will invalidate the keys**
 - On macOS and Ubuntu 20.04+ Set the type of GPG keys we will be creating

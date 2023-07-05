@@ -91,7 +91,7 @@ git config --global core.excludesfile ~/dev/bash_tools/gitignore_global
 git config --global core.editor "nvim"
 git config --global --add --bool push.autoSetupRemote true
 git config --global commit.gpgsign true
-git config --global user.signingkey 1AD6223D5862AA18
+git config --global user.signingkey 2B99B045C097795C
 
 # Install GPG key for commit signing
 sudo apt-get install git-lfs
