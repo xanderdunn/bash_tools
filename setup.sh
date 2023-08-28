@@ -41,7 +41,7 @@ sudo apt-get install -y htop # system perf monitoring
 sudo apt-get install -y unzip
 
 # Set timezone
-sudo timedatectl set-timezone America/New_York
+sudo timedatectl set-timezone America/Los_Angeles
 
 add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
