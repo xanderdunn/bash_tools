@@ -128,6 +128,7 @@ npm install -g neovim
 # Install Coc extensions for Neovim
 nvim -c 'CocInstall coc-pyright'
 nvim -c 'CocInstall coc-rust-analyzer'
+nvim -c 'CocInstall coc-spell-checker'
 nvim -c 'Copilot'
 
 # Setup clipboard over ssh:
