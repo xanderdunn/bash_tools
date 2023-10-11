@@ -66,6 +66,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
 nvim +PlugInstall
 sudo apt-get install -y python3-pip
+python3 -m pip install --upgrade pip
 pip3 install pynvim # dependency for neovim plugin
 pip3 install yapf # dependency for yapf neovim plugin
 
@@ -138,13 +139,13 @@ add_line_to_file_if_missing "export PATH=$PATH:~/.iterm2" ~/.bashrc false
 mkdir -p ~/.local/bin
 touch ~/.local/bin/ttyup
 chmod +x ~/.local/bin/ttyup
-#text="#!/bin/bash
-#parent() { awk '{print $4}' \"/proc/$1/stat\"; }
-#leader() { awk '{print $6}' \"/proc/$1/stat\"; }
-#it2copy > \"/proc/$(parent $(leader $$))/fd/0\""
-#echo -e "$text" > ~/.local/bin/ttyup
 
 sudo apt-get autoremove -y
 
-echo "You'll need to copy paste the bash script to ~/.local/bin for iTerm clipboard passing to work."
+echo "You'll need to copy paste the bash script to ~/.local/bin for iTerm clipboard passing to work:"
+##!/bin/bash
+#parent() { awk '{print $4}' \"/proc/$1/stat\"; }
+#leader() { awk '{print $6}' \"/proc/$1/stat\"; }
+#it2copy > \"/proc/$(parent $(leader $$))/fd/0\"
+echo "You'll need to scp the GPG keyring to the machine for commit signing to work:"
 echo "Set your hostname with: sudo hostnamectl set-hostname <hostname>"
