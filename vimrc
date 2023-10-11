@@ -231,8 +231,8 @@ if has('mouse')
 endif
 
 " Spell Check
-autocmd BufRead,BufNewFile *.md setlocal spell
-autocmd BufRead,BufNewFile *.txt.gpg setlocal spell
+"autocmd BufRead,BufNewFile *.md setlocal spell
+"autocmd BufRead,BufNewFile *.txt.gpg setlocal spell
 
 " History
 "set nobackup		" prevent the ~ backup files from appearing on the filesystem
