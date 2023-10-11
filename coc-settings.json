@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "/opt/homebrew/bin/python3.10",
+    "python.linting.ruffEnabled": true,
+    "rust-analyzer.cargo.extraEnv": { "CPATH": "/opt/aws/neuron/include", "LIBRARY_PATH": "/opt/aws/neuron/lib", "LD_LIBRARY_PATH": "/opt/aws/neuron/lib" },
+    "coc.preferences.formatOnSaveFiletypes": ["rust", "python"],
+    "rust-analyzer.cargo.buildScripts.overrideCommand": ["/home/ubuntu/.cargo/bin/cargo", "check", "--message-format=json", "--all-targets" , "--package", "xla", "--no-default-features", "--features", "trn"],
+    "rust-analyzer.check.overrideCommand": ["/home/ubuntu/.cargo/bin/cargo", "check", "--message-format=json", "--all-targets" , "--package", "xla", "--no-default-features", "--features", "trn"]
+    "cSpell.words": ["kube", "openapi", "Kubernetes", "apimachinery", "rngs", "seedable", "kubeconfig", "consts", "proto", "minikube", "kubectl", "configmap", "tlsv", "configmaps", "cpus", "namespacing", "hostnames", "uids", "hasher", "idempotency", "xander", "macrobatch", "sharded", "nocapture", "backoff", "dedup"]
+}
