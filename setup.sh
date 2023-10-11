@@ -78,6 +78,7 @@ create_dir_if_not_exist ~/.config/htop
 ln -sf ~/dev/bash_tools/htoprc ~/.config/htop/htoprc
 create_dir_if_not_exist ~/.config/yapf
 ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
+ln -sf ~/dev/bash_tools/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # Git Setup
 # Install latest release version of git
