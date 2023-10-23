@@ -106,3 +106,10 @@ function loop() {
 greprust() {
   grep -r --include="*.rs" "$1" .
 }
+
+clearmodelcache() {
+    rm -f /mnt/drive1/tmp/*.neff
+    rm -f /mnt/drive1/tmp/*.pb
+    rm -f /tmp/*.neff
+    rm -f /tmp/*.pb
+}
