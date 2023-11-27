@@ -240,14 +240,6 @@ If you have two YubiKeys, it's required that you enable Google's Advanced Protec
         - `quit`
 - `pass init <ID>`
 
-## Yubikey OPSEC
-- Remove the Yubikey from your computer when not in use
-- When traveling with your laptop, do not keep the Yubikey in the laptop bag. Instead, carry it on your person (e.g. in your wallet, on a keychain or lanyard)
-- If you have more than one Yubikey
-    - Make sure they are clearly labeled so that you can tell which is which
-    - Set the admin password as soon as you receive them (even if one is used as backup)
-    - The backup Yubikey should be stored in a secure location, ideally in a locked safe.
-
 ## Troubleshooting
 - If GPG signing is failing, try a simple GPG sign like `echo "test" | gpg --clearsign` to see what the error is
 - Troubleshooting steps [here](https://github.com/drduh/YubiKey-Guide#troubleshooting)
@@ -271,7 +263,7 @@ If you have two YubiKeys, it's required that you enable Google's Advanced Protec
          # Add this following line to ~/.gnupg/gpg-agent.conf
          pinentry-program /usr/bin/pinentry-gtk-2
          gpg-connect-agent updatestartuptty /bye```
-- If you are having issues with `ansible` or any other tools establishing  multiple ssh connections at the same time, these issues can be caused by too much pressure put on Yubikey. Please use concurency carefully. For example: for ansible you can use `forks = 10` in `[defaults]` section of `/etc/ansible/ansible.cfg` or `-f 10` parameter. Please note that `10` is a subjective number that works for some machine. YMMV
+- If you are having issues with `ansible` or any other tools establishing  multiple ssh connections at the same time, these issues can be caused by too much pressure put on Yubikey. Please use concurrency carefully. For example: for ansible you can use `forks = 10` in `[defaults]` section of `/etc/ansible/ansible.cfg` or `-f 10` parameter. Please note that `10` is a subjective number that works for some machine. YMMV
 - To extend the expiration date of a key:
     - `gpg --list-keys`
     - `gpg --edit-key <key id>`
@@ -312,5 +304,3 @@ admin
 passwd
 unblock pin
 ```
-- Increase the number of allowed PIN retries:
-- Increase the timeout until you have to re-enter your PIN:
