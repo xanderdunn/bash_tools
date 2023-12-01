@@ -1,5 +1,9 @@
 # YubiKey GPG and SSH
 
+There are two competing interests here:
+1. Premature __ is the root of all evil. We can fill in the blank with "security". I've seen plenty of security obsessed startups that have 0 products and 0 users and $0 on the line. You shouldn't be worrying about the below until you have serious adversaries because you have seriously valuable targets.
+2. Your organization isn't serious about security until every single person with access to a computer is using a hardware key. In 2017 Google switched all of its employees to hardware keys and this stopped all phishing attacks, news [here](https://www.cnet.com/news/privacy/physical-key-is-the-secret-to-google-employees-online-security/).
+
 ## Goal
 We want to be able to:
 - :white_check_mark: GPG-sign all GitHub commits
