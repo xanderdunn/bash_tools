@@ -134,6 +134,7 @@ nvim -c 'CocInstall coc-spell-checker'
 nvim -c 'CocInstall coc-json'
 nvim -c 'CocInstall coc-yaml'
 nvim -c 'CocInstall coc-toml'
+nvim -c 'CocInstall coc-sh'
 nvim -c 'Copilot'
 
 # Setup clipboard over ssh:
