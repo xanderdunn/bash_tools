@@ -97,7 +97,7 @@ pub   ed25519 2022-04-25 [SC] [expires: 2022-07-24]
 - Setup git commit GPG signing
     - `git config --global user.signingkey 01BECFA3C1AE191D15`
     - `git config --global commit.gpgsign true` # Default to GPG signing all commits
-    - Make sure your git email matches your GPG email: `git config --global user.email "MY_NAME@avalabs.org"`
+    - Make sure your git email matches your GPG email: `git config --global user.email "MY_NAME@org.com"`
     - :white_check_mark: Test it out in a repo: `git commit -m "THE COMMIT MESSAGE"`. If your key is not connected, it will ask you to connect it. Then you will enter your PIN. **The YubiKey will flash its light and you tap it. You will have to tap it every time you use it, remember to tap it! You will have to tap it even if you aren't prompted for your PIN.**
 
 ## Choosing an SSH Method
@@ -132,8 +132,7 @@ On macOS that last line should be replaced with `pinentry-program /usr/local/bin
         ssh-add -L
         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAztWqZ3U9Fthi3NHnThRj7Li8GcQliYVTWmFBGAyHjL cardno:19 145 116
 
-  - :white_check_mark: [Upload the public key to your GitHub settings](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) and test it on a private repository: `git clone git@github.com:ava-labs/MY_REPO`. If your YubiKey isn't connected, this will just fail. Once it's connected, enter your PIN and then tap the YubiKey.
-  - :white_check_mark: The Ava Labs github organization has enabled SAML SSO. [Authorize the SSH key for use with SAML single sign-on](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on). ![configure sso](/assets/configure-sso.png)
+  - :white_check_mark: [Upload the public key to your GitHub settings](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) and test it on a private repository: `git clone git@github.com:org/MY_REPO`. If your YubiKey isn't connected, this will just fail. Once it's connected, enter your PIN and then tap the YubiKey.
 - Remote Machine SSH
     - Note that [AWS supports ED25519 SSH keys](https://aws.amazon.com/about-aws/whats-new/2021/08/amazon-ec2-customers-ed25519-keys-authentication/). However, [Azure does not](https://docs.microsoft.com/en-us/troubleshoot/azure/virtual-machines/ed25519-ssh-keys). This means that Azure's UI will not allow creating an instance with an ED25519 key, but an ED25519 key can still be manually put into an instance's ~/.ssh/authorized_keys file and that works.
     - Before throwing away your previous SSH keys, SSH into any instance you need to have access to and copy your public key shown by `ssh-add -L` to ~/.ssh/authorized_keys
@@ -153,7 +152,7 @@ This method is newer than the GPG method and doesn't require hijacking ssh-agent
 - Set this new key as your default SSH key:
     - In `~/.ssh/config`: `IdentityFile /home/MY_USER/.ssh/id_ed25519_sk`
 - GitHub
-    - :white_check_mark: Now add the id_ed25519_sk.pub to your GitHub settings and test it on a private repository: `git clone git@github.com:ava-labs/MY_REPO`. If your YubiKey isn't connected, this will just fail. Once it's connected, enter your SSH key passphrase and then tap your YubiKey.
+    - :white_check_mark: Now add the id_ed25519_sk.pub to your GitHub settings and test it on a private repository: `git clone git@github.com:org/MY_REPO`. If your YubiKey isn't connected, this will just fail. Once it's connected, enter your SSH key passphrase and then tap your YubiKey.
 - Remote Machine SSH
     - Before throwing away your previous SSH keys, SSH into any instance you need to have access to and add your new id_ed25519_sk.pub to ~/.ssh/authorized_keys
     - Now you should be able to SSH into your instance with your new `id_ed25519_sk` key
@@ -177,7 +176,7 @@ With the above GPG instructions you can do SSH actions and GPG signatures on you
 - Now on the remote instance you should see the key appear in the keyring: `gpg --list-keys`.
 - Now close your previous SSH session with the remote, and open a new one with agent forwarding: `ssh -A MY_USER@REMOTE_IP`
     - With your YubiKey plugged in locally, you should also see your SSH public key when you do `ssh-add -L` on the remote machine.
-- :white_check_mark: Test that you can now clone a private repository on the remote machine: `git clone git@github.com:ava-labs/MY_REPO`
+- :white_check_mark: Test that you can now clone a private repository on the remote machine: `git clone git@github.com:org/MY_REPO`
 - On your local machine, configure GPG agent forwarding: Edit `~/.ssh/config` and add:
     - Replace `<REMOTE_IP>` with the IP address of the remote machine you're SSHing into.
     - On your remote machine, run `gpgconf --list-dir agent-socket` and replace `<REMOTE_SOCKET>` with that value
@@ -193,7 +192,7 @@ Host <REMOTE_IP>
 - Configure git as you did on your local machine:
     - `git config --global user.signingkey 01BECFA3C1AE191D15`
     - `git config --global commit.gpgsign true` # Default to GPG signing all commits
-    - Make sure your git email matches your GPG email: `git config --global user.email "MY_NAME@avalabs.org"`
+    - Make sure your git email matches your GPG email: `git config --global user.email "MY_NAME@org.com"`
 - `exit` the ssh session and start it again so that the `~/.ssh/config` settings take effect
 - On the remote machine, when you SSH in you should now see your GPG secret key listed: `gpg --list-secret-keys`
 - :white_check_mark: Test that you can now sign a commit on the remote machine: `git commit -m "MESSAGE"`
