@@ -73,9 +73,10 @@
     - `:CocConfig` and put in:
 ```json
 {
-    "python.pythonPath": "/opt/homebrew/bin/python3.11"
+    "python.pythonPath": "/opt/homebrew/bin/python3"
 }
   ```
 
 # Setup Python dev
 - `pip3 install numpy pandas`
+- `/opt/homebrew/bin/python3 -m pip install --user --break-system-packages pynvim`

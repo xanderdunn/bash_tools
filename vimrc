@@ -6,7 +6,9 @@ Plug 'scrooloose/nerdtree'                  " File system explorer
 "Plug 'Numkil/ag.nvim'                       " ag support for searching file, asynchronous neovim support
 Plug 'mileszs/ack.vim'                      " File string search
 Plug 'honza/vim-snippets'                   " default snippets for ultisnips
+" Plug 'overcache/NeoSolarized' " Newer version that is meant for neovim specifically, but still not compatible with NeoVim 0.10
 Plug 'altercation/vim-colors-solarized'     " Color scheme
+
 "Plug 'AndrewRadev/simple_bookmarks.vim'     " Persistent, global marks
 "Plug 'MattesGroeger/vim-bookmarks'          " persistent project bookmarks.  It adds a gutter that is annoying.
 "Plug 'jupyter-vim/jupyter-vim'              " Two-way Jupyter<>vim notebooks
@@ -19,7 +21,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'jamessan/vim-gnupg'                   " Seamlessly work with GPG encrypted files
 Plug 'tpope/vim-eunuch'                     " Adds commands like :Move
 "Plug 'rust-lang/rust.vim' " Doesn't appear to be useful when using coc-rust-analyzer
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
 "Plug 'kenn7/vim-arsync'                     " Async rsync on file save
 
 nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
@@ -159,6 +161,8 @@ call plug#end()
 set background=dark
 let g:solarized_termtrans = 1
 colorscheme solarized
+" set termguicolors
+" colorscheme NeoSolarized
 " Make the gutter background the same color as the text area's background
 let g:gitgutter_override_sign_column_highlight = 0
 set signcolumn=yes
@@ -173,9 +177,9 @@ let s:uname = system("uname -s")
     "let g:python_host_prog = '/usr/local/anaconda3/envs/python2/bin/python'
     "let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
 "endif
-if has('macunix')
-    let g:python3_host_prog = '/opt/homebrew/bin/python3.11'
-endif
+"if has('macunix')
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
+"endif
 set clipboard+=unnamedplus
 set nocompatible " Use vim settings
 set modelines=0	" Prevent security hole

@@ -5,43 +5,7 @@
         "$HOME/.rustup/**"
     ],
     "python.linting.ruffEnabled": true,
-    "rust-analyzer.cargo.extraEnv": {
-        "CPATH": "/opt/aws/neuron/include",
-        "LIBRARY_PATH": "/opt/aws/neuron/lib",
-        "LD_LIBRARY_PATH": "/opt/aws/neuron/lib",
-        "RUSTFLAGS": "--cfg trn"
-    },
-    "coc.preferences.formatOnSave": true,
-    "rust-analyzer.cargo.buildScripts.overrideCommand": [
-        "/mnt/drive1/.cargo/bin/cargo",
-        "check",
-        "--message-format=json",
-        "--all-targets",
-        "--package",
-        "xla",
-        "--no-default-features",
-        "--features",
-        "trn",
-        "--target-dir",
-        "target-rust-analyzer/"
-    ],
-    "rust-analyzer.cargo.noDefaultFeatures": true,
-    "rust-analyzer.cargo.features": [
-        "trn"
-    ],
-    "rust-analyzer.check.overrideCommand": [
-        "/mnt/drive1/.cargo/bin/cargo",
-        "check",
-        "--message-format=json",
-        "--all-targets",
-        "--package",
-        "xla",
-        "--no-default-features",
-        "--features",
-        "trn",
-        "--target-dir",
-        "target-rust-analyzer/"
-    ],
+    "coc.preferences.formatOnSave": false,
     "rust-analyzer.rust.analyzerTargetDir": true,
     "cSpell.words": [
         "kube",
@@ -162,6 +126,15 @@
         "TODOs",
         "prefetch",
         "cond",
-        "CondVar"
+        "CondVar",
+        "deque",
+        "mutex",
+        "geospatial",
+        "else's",
+        "asyncio",
+        "heapify",
+        "heapq",
+        "ndarray",
+        "vectorize"
     ]
 }
