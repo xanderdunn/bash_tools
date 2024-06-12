@@ -64,8 +64,43 @@ local plugins = {
 		},
 		{ "mhartington/formatter.nvim" },
 	},
-	-- consider https://github.com/mhartington/formatter.nvim
-	-- consider https://github.com/folke/trouble.nvim
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<c-x>",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<c-l>",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<c-q>",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	},
 }
 
 require("lazy").setup(plugins, {}) -- Activate with :Lazy
@@ -92,7 +127,23 @@ require("mason-lspconfig").setup({
 require("lint").linters_by_ft = {
 	markdown = { "vale" },
 	python = { "ruff" },
+	yaml = { "yamllint" },
+	docker = { "hadolint" },
+	rust = { "bacon" },
 }
+-- nvim-lint autolint on save
+vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
+	callback = function()
+		-- try_lint without arguments runs the linters defined in `linters_by_ft`
+		-- for the current filetype
+		require("lint").try_lint()
+
+		-- You can call `try_lint` with a linter name or a list of names to always
+		-- run specific linters, independent of the `linters_by_ft` configuration
+		require("lint").try_lint("cspell")
+		require("lint").try_lint("codespell")
+	end,
+})
 require("auto-session").setup({
 	log_level = "error",
 	auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
@@ -117,22 +168,9 @@ require("formatter").setup({
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	-- group = "__formatter__",
 	command = ":FormatWrite",
 })
 
--- nvim-lint autolint on save
-vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
-	callback = function()
-		-- try_lint without arguments runs the linters defined in `linters_by_ft`
-		-- for the current filetype
-		require("lint").try_lint()
-
-		-- You can call `try_lint` with a linter name or a list of names to always
-		-- run specific linters, independent of the `linters_by_ft` configuration
-		require("lint").try_lint("cspell")
-	end,
-})
 local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({
 	settings = {
@@ -158,3 +196,38 @@ lspconfig.jsonls.setup({})
 lspconfig.taplo.setup({})
 lspconfig.yamlls.setup({})
 lspconfig.ruff_lsp.setup({})
+
+-- Ignore the ~/.config/nvim/undo directory for lsp language server
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.config/nvim/undo*",
+	callback = function()
+		vim.defer_fn(function()
+			vim.cmd("LspStop")
+		end, 1000)
+	end,
+})
+
+-- Enable folds using treesitter plugin, from https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldcolumn = "0"
+vim.opt.foldtext = ""
+vim.opt.foldlevelstart = 1
+
+-- Remember:
+-- Open all folds: zR
+-- Close all folds: zM
+-- Open fold under cursor: zo
+-- zz to center cursor on screen
+-- :Gitsigns toggle_current_line_blame shows the blame from the git history
+-- TODO: Learn how to edit all instances of a variable. This might help:
+--     https://github.com/neoclide/coc.nvim/wiki/Multiple-cursors-support
+-- Toggle whether the current line is commented: gcc or gc in visual mode
+-- Open file explorer: :NvimTreeOpen, or <leader>f
+-- Ignore cspell word in file with comment: # cspell:ignore word
+-- ctrl-x to open trouble diagnostics window
+
+-- TODO:
+-- How do I add words to cspell dictionary file and codespell ignore words file?
+-- I would love a single keyboard shortcut to ignore the diagnostic message on any current or selected
+--     line. For example add to cspell.json, add to codespell ignore words, add to ruff ignore, etc.

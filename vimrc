@@ -1,18 +1,5 @@
 lua require('config')
 
-" UI {{{
-set background=dark
-let g:solarized_termtrans = 1
-colorscheme solarized
-" set termguicolors
-" colorscheme NeoSolarized
-" Make the gutter background the same color as the text area's background
-let g:gitgutter_override_sign_column_highlight = 0
-set signcolumn=yes
-highlight SignColumn ctermbg=None
-" }}}
-
-" Settings {{{
 " Check vim's Python version: :python import sys; print(sys.version)
 " :echo has("python")
 let s:uname = system("uname -s")
@@ -62,11 +49,8 @@ autocmd FileType vim autocmd BufEnter * set textwidth=0     " Force this on .vim
 set textwidth=0
 set formatoptions-=tc
 set autoread                    " Automatically read from file whenever it's changed on disk
-" TODO: Map something with the option meta key:
-" :nnoremap <silent>∆ :set paste<CR>m`o<Esc>`:set nopaste<CR>`
 
 " History
-"set nobackup		" prevent the ~ backup files from appearing on the filesystem
 set backup
 set writebackup
 set swapfile
@@ -78,17 +62,13 @@ set undolevels=500
 set incsearch		" do incremental searching
 
 " Auto save
-"autocmd BufUnload,BufLeave,FocusLost,QuitPre,InsertLeave,TextChanged,CursorHold * silent! w
-" This causes files to be erased on open sometimes
 :au FocusLost * silent! wa
-" }}}
 
 " use ctrl-p to open fuzzy search
 nnoremap <C-p> :<C-u>FZF<CR>
 " use ctrl-f to open the file explorer
 nnoremap <leader>f :NvimTreeToggle<CR>
 
-" Keyboard Mappings {{{
 " To find out what a key is mapped to execute :verbose map KEY, such as <C-h>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>el :e ~/.config/nvim/lua/config.lua<cr>
@@ -100,20 +80,18 @@ nnoremap <C-l> <C-w>l
 " Use 0 to jump to the first non-whitespace character on the line and ^ to go to the beginning of the line
 nnoremap 0 ^
 nnoremap ^ 0
-" When accidently typing :q out of order, do what's expected rather than showing a list of commands I may have been thinking of
+" When accidentally typing :q out of order, do what's expected rather than showing a list of commands I may have been thinking of
 map q: :q
 
 nnoremap <c-d> <c-b>
 
 " Search Settings
-"nnoremap / /\v
-"vnoremap / /\v
 set ignorecase                      " Ignore case if all character in search string are lowercase
 set smartcase                       " Case-sensitive search if at least one character is uppercase
-set gdefault                        " By default, replace all occurences of a word on the line
+set gdefault                        " By default, replace all occurrences of a word on the line
 " Highlight search results while typing
 set incsearch
-" The bellow setting will highlight the matching parenthesis when it's closed, but the performance drag is too much.
+" The below setting will highlight the matching parenthesis when it's closed, but the performance drag is too much.
 "set showmatch
 set hlsearch
 " Remove search highlights with <leader><space>
@@ -127,15 +105,10 @@ nnoremap ; :
 " Show/hide line numbers
 nnoremap <leader>n :set number<cr>
 nnoremap <leader>nn :set nonumber<cr>
-" Cool ideas to show relative or absolute line numbers depending on current use
-":au FocusLost * :set number
-":au FocusGained * :set relativenumber
-"autocmd InsertEnter * :set number
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" Autocommands {{{
 " Set the title of the Terminal to the currently open file
 function! SetTerminalTitle()
     let titleString = expand('%:t')
@@ -152,21 +125,3 @@ augroup NoSimultaneousEdits
     autocmd  SwapExists  *  :let v:swapchoice = 'e'
 augroup END
 set shortmess+=A " Don't warn about existing swap files
-
-" Remove all trailing whitespaces on file save (doesn't remove trailing newlines)
-function! StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-:set listchars=eol:$
-
-" Remember:
-" zz to center cursor on screen
-" :Gitsigns toggle_current_line_blame shows the blame from the git history
-" TODO: Learn how to edit all instances of a variable. This might help:
-" https://github.com/neoclide/coc.nvim/wiki/Multiple-cursors-support
-" Toggle whether the current line is commented: gcc or gc in visual mode
-" Open file explorer: :NvimTreeOpen
