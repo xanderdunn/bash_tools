@@ -86,7 +86,7 @@ set incsearch		" do incremental searching
 " use ctrl-p to open fuzzy search
 nnoremap <C-p> :<C-u>FZF<CR>
 " use ctrl-f to open the file explorer
-nnoremap <C-f> :NvimTreeToggle<CR>
+nnoremap <leader>f :NvimTreeToggle<CR>
 
 " Keyboard Mappings {{{
 " To find out what a key is mapped to execute :verbose map KEY, such as <C-h>

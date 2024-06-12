@@ -28,6 +28,7 @@ local plugins = {
 	-- :LspInfo to see which language servers are running on this buffer
 	{ "neovim/nvim-lspconfig" }, -- LSP config manager, used by mason, use ]d and [d to jump to prev and next
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter-context" },
 	{ "nvim-tree/nvim-tree.lua" }, -- file explorer, open with ctrl-f
 	-- Maybe replace fzf with https://github.com/nvim-telescope/telescope.nvim
 	{
