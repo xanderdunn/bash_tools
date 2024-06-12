@@ -27,7 +27,7 @@
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 - `sudo vim /etc/shell` and add the line at the end `/opt/homebrew/bin/bash`
 - `chsh -s /opt/homebrew/bin/bash`
-- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac pwgen the_silver_searcher bash-completion`
+- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac pwgen the_silver_searcher bash-completion font-hack-nerd-font`
     - openssh is needed to be able to use _sk ssh keys with Yubikey to clone bash_tools
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/profile ~/.profile`
 - Now open iTerm
@@ -78,5 +78,6 @@
   ```
 
 # Setup Python dev
-- `pip3 install numpy pandas`
-- `/opt/homebrew/bin/python3 -m pip install --user --break-system-packages pynvim`
+- python3 -m venv ~/.config/py_env
+- Add to ~/.profile: `source ~/.config/py_env/bin/activate`
+- pip3 install pynvim numpy pandas

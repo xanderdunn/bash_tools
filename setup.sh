@@ -79,6 +79,8 @@ ln -sf ~/dev/bash_tools/htoprc ~/.config/htop/htoprc
 create_dir_if_not_exist ~/.config/yapf
 ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 ln -sf ~/dev/bash_tools/coc-settings.json ~/.config/nvim/coc-settings.json
+create_dir_if_not_exist ~/.config/nvim/lua
+ln -sf ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua
 
 # Git Setup
 # Install latest release version of git
@@ -128,13 +130,7 @@ nvm use 18
 npm install -g neovim
 
 # Install Coc extensions for Neovim
-nvim -c 'CocInstall coc-pyright'
-nvim -c 'CocInstall coc-rust-analyzer'
 nvim -c 'CocInstall coc-spell-checker'
-nvim -c 'CocInstall coc-json'
-nvim -c 'CocInstall coc-yaml'
-nvim -c 'CocInstall coc-toml'
-nvim -c 'CocInstall coc-sh'
 nvim -c 'Copilot'
 
 # Setup clipboard over ssh:
