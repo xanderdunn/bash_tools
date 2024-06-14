@@ -126,7 +126,7 @@ require("mason-lspconfig").setup({
 })
 require("lint").linters_by_ft = {
 	markdown = { "vale" },
-	python = { "ruff" },
+	python = { "ruff", "mypy" },
 	yaml = { "yamllint" },
 	docker = { "hadolint" },
 	rust = { "bacon" },
@@ -213,6 +213,7 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- vim.opt.foldcolumn = "0"
 vim.opt.foldtext = ""
 vim.opt.foldlevelstart = 1
+vim.opt.signcolumn = "yes"
 
 -- Remember:
 -- Open all folds: zR
@@ -231,3 +232,5 @@ vim.opt.foldlevelstart = 1
 -- How do I add words to cspell dictionary file and codespell ignore words file?
 -- I would love a single keyboard shortcut to ignore the diagnostic message on any current or selected
 --     line. For example add to cspell.json, add to codespell ignore words, add to ruff ignore, etc.
+-- Get pyright autocomplete suggestions -> maybe from coq.nvim?
+-- Consider adding debugger as described here: https://youtu.be/4BnVeOUeZxc?feature=shared&t=740
