@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Find plugins: https://github.com/rockerBOO/awesome-neovim
 local plugins = {
 	{ "lewis6991/gitsigns.nvim" }, -- show lines with git diff in the gutter
-	{ "github/copilot.vim" }, -- LLM autocomplete
+	-- { "github/copilot.vim" }, -- LLM autocomplete
 	{ "williamboman/mason.nvim" }, -- LSP manager, activate with :Mason
 	{ "williamboman/mason-lspconfig.nvim" }, -- mason config manager
 	-- Go to definition with ctrl-]
@@ -38,7 +38,7 @@ local plugins = {
 		end,
 	}, -- fuzzy search
 	{ "junegunn/fzf.vim" }, -- fuzzy search with ctrl-p
-	{ "rmagatti/auto-session" }, -- restore last open file
+	-- { "rmagatti/auto-session" }, -- restore last open file
 	{ "numToStr/Comment.nvim" }, -- toggle comments with keystrokes gcc or gc in visual mode
 	{
 		"maxmx03/solarized.nvim",
@@ -50,6 +50,10 @@ local plugins = {
 		end,
 	}, -- solarized color scheme
 	{ "mfussenegger/nvim-lint" },
+	{ "nvimtools/none-ls.nvim", dependencies = {
+		"nvim-lua/plenary.nvim",
+	} },
+	{ "davidmh/cspell.nvim" },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -62,8 +66,9 @@ local plugins = {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		},
-		{ "mhartington/formatter.nvim" },
 	},
+	-- Auto format files on write
+	{ "mhartington/formatter.nvim" },
 	{
 		"folke/trouble.nvim",
 		opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -101,6 +106,11 @@ local plugins = {
 			},
 		},
 	},
+	{ "farmergreg/vim-lastplace" }, -- restore the last location you were at in a file
+	-- Open current line on Github
+	{
+		"ruanyl/vim-gh-line",
+	},
 }
 
 require("lazy").setup(plugins, {}) -- Activate with :Lazy
@@ -124,30 +134,62 @@ require("mason-lspconfig").setup({
 		"ruff_lsp",
 	},
 })
-require("lint").linters_by_ft = {
-	markdown = { "vale" },
-	python = { "ruff", "mypy" },
-	yaml = { "yamllint" },
-	docker = { "hadolint" },
-	rust = { "bacon" },
-}
--- nvim-lint autolint on save
-vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
-	callback = function()
-		-- try_lint without arguments runs the linters defined in `linters_by_ft`
-		-- for the current filetype
-		require("lint").try_lint()
-
-		-- You can call `try_lint` with a linter name or a list of names to always
-		-- run specific linters, independent of the `linters_by_ft` configuration
-		require("lint").try_lint("cspell")
-		require("lint").try_lint("codespell")
+local null_ls = require("null-ls")
+local cspell = require("cspell")
+local cspellConfig = {
+	config_file_preferred_name = "cspell.json",
+	find_json = function()
+		-- Expand the path to the user's home directory
+		local home_path = vim.fn.expand("~")
+		-- Set the full path to your cspell.json file
+		local cspell_path = home_path .. "/dev/bash_tools/cspell.json"
+		-- Return the path to the cspell.json file
+		return cspell_path
 	end,
+}
+null_ls.setup({
+	sources = {
+		cspell.diagnostics.with({
+			config = cspellConfig,
+			-- info rather than errors
+			diagnostics_postprocess = function(diagnostic)
+				diagnostic.severity = vim.diagnostic.severity["INFO"]
+			end,
+		}),
+		cspell.code_actions.with({ config = cspellConfig }),
+		null_ls.builtins.diagnostics.vale,
+		null_ls.builtins.formatting.codespell,
+		null_ls.builtins.diagnostics.yamllint,
+		null_ls.builtins.diagnostics.hadolint,
+		null_ls.builtins.diagnostics.mypy,
+	},
 })
-require("auto-session").setup({
-	log_level = "error",
-	auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-})
+
+-- require("lint").linters_by_ft = {
+-- 	markdown = { "vale" },
+-- 	python = { "ruff", "mypy" },
+-- 	yaml = { "yamllint" },
+-- 	docker = { "hadolint" },
+-- 	rust = { "bacon" },
+-- 	json = { "jsonlint" },
+-- }
+-- -- nvim-lint autolint on save
+-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
+-- 	callback = function()
+-- 		-- try_lint without arguments runs the linters defined in `linters_by_ft`
+-- 		-- for the current filetype
+-- 		require("lint").try_lint()
+--
+-- 		-- You can call `try_lint` with a linter name or a list of names to always
+-- 		-- run specific linters, independent of the `linters_by_ft` configuration
+-- 		require("lint").try_lint("cspell")
+-- 		require("lint").try_lint("codespell")
+-- 	end,
+-- })
+-- require("auto-session").setup({
+-- 	log_level = "error",
+-- 	-- auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+-- })
 require("Comment").setup()
 require("formatter").setup({
 	-- See the filetype configurations https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
@@ -207,12 +249,16 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
+-- Key bindings
+-- Activate code actions, for example to add to cspell dictionary
+vim.keymap.set("n", "ca", vim.lsp.buf.code_action, {})
+
 -- Enable folds using treesitter plugin, from https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- vim.opt.foldcolumn = "0"
 vim.opt.foldtext = ""
-vim.opt.foldlevelstart = 1
+-- vim.opt.foldlevelstart = 1
 vim.opt.signcolumn = "yes"
 
 -- Remember:
@@ -229,7 +275,6 @@ vim.opt.signcolumn = "yes"
 -- ctrl-x to open trouble diagnostics window
 
 -- TODO:
--- How do I add words to cspell dictionary file and codespell ignore words file?
 -- I would love a single keyboard shortcut to ignore the diagnostic message on any current or selected
 --     line. For example add to cspell.json, add to codespell ignore words, add to ruff ignore, etc.
 -- Get pyright autocomplete suggestions -> maybe from coq.nvim?
