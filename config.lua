@@ -5,23 +5,23 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Inspired by https://rdrn.me/neovim/
 -- lazy.nvim package manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazy_path) then
 	vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
 		"--branch=stable", -- latest stable release
-		lazypath,
+		lazy_path,
 	})
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(lazy_path)
 
 -- Find plugins: https://github.com/rockerBOO/awesome-neovim
 local plugins = {
 	{ "lewis6991/gitsigns.nvim" }, -- show lines with git diff in the gutter
-	-- { "github/copilot.vim" }, -- LLM autocomplete
+	{ "github/copilot.vim" }, -- LLM autocomplete
 	{ "williamboman/mason.nvim" }, -- LSP manager, activate with :Mason
 	{ "williamboman/mason-lspconfig.nvim" }, -- mason config manager
 	-- Go to definition with ctrl-]
@@ -49,7 +49,6 @@ local plugins = {
 			vim.cmd.colorscheme("solarized")
 		end,
 	}, -- solarized color scheme
-	{ "mfussenegger/nvim-lint" },
 	{ "nvimtools/none-ls.nvim", dependencies = {
 		"nvim-lua/plenary.nvim",
 	} },
@@ -157,7 +156,7 @@ null_ls.setup({
 			end,
 		}),
 		cspell.code_actions.with({ config = cspellConfig }),
-		null_ls.builtins.diagnostics.vale,
+		-- null_ls.builtins.diagnostics.vale, -- requires .vale.ini setup
 		null_ls.builtins.formatting.codespell,
 		null_ls.builtins.diagnostics.yamllint,
 		null_ls.builtins.diagnostics.hadolint,
@@ -165,27 +164,6 @@ null_ls.setup({
 	},
 })
 
--- require("lint").linters_by_ft = {
--- 	markdown = { "vale" },
--- 	python = { "ruff", "mypy" },
--- 	yaml = { "yamllint" },
--- 	docker = { "hadolint" },
--- 	rust = { "bacon" },
--- 	json = { "jsonlint" },
--- }
--- -- nvim-lint autolint on save
--- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "BufReadPost" }, {
--- 	callback = function()
--- 		-- try_lint without arguments runs the linters defined in `linters_by_ft`
--- 		-- for the current filetype
--- 		require("lint").try_lint()
---
--- 		-- You can call `try_lint` with a linter name or a list of names to always
--- 		-- run specific linters, independent of the `linters_by_ft` configuration
--- 		require("lint").try_lint("cspell")
--- 		require("lint").try_lint("codespell")
--- 	end,
--- })
 -- require("auto-session").setup({
 -- 	log_level = "error",
 -- 	-- auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
@@ -213,8 +191,8 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	command = ":FormatWrite",
 })
 
-local lspconfig = require("lspconfig")
-lspconfig.lua_ls.setup({
+local lsp_config = require("lspconfig")
+lsp_config.lua_ls.setup({
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -223,21 +201,21 @@ lspconfig.lua_ls.setup({
 		},
 	},
 })
-lspconfig.rust_analyzer.setup({
+lsp_config.rust_analyzer.setup({
 	-- Server-specific settings. See `:help lspconfig-setup`
 	settings = {
 		["rust-analyzer"] = {},
 	},
 })
-lspconfig.pyright.setup({})
-lspconfig.dockerls.setup({})
-lspconfig.vimls.setup({})
-lspconfig.marksman.setup({})
-lspconfig.bashls.setup({})
-lspconfig.jsonls.setup({})
-lspconfig.taplo.setup({})
-lspconfig.yamlls.setup({})
-lspconfig.ruff_lsp.setup({})
+lsp_config.pyright.setup({})
+lsp_config.dockerls.setup({})
+lsp_config.vimls.setup({})
+lsp_config.marksman.setup({})
+lsp_config.bashls.setup({})
+lsp_config.jsonls.setup({})
+lsp_config.taplo.setup({})
+lsp_config.yamlls.setup({})
+lsp_config.ruff_lsp.setup({})
 
 -- Ignore the ~/.config/nvim/undo directory for lsp language server
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
@@ -279,3 +257,6 @@ vim.opt.signcolumn = "yes"
 --     line. For example add to cspell.json, add to codespell ignore words, add to ruff ignore, etc.
 -- Get pyright autocomplete suggestions -> maybe from coq.nvim?
 -- Consider adding debugger as described here: https://youtu.be/4BnVeOUeZxc?feature=shared&t=740
+-- There's an issue with null-ls mypy when creating a new empty file with `nvim` from the command
+--     line where it will immediately run the linter on the path which doesn't exist on the file
+--     system yet and it will show an error message

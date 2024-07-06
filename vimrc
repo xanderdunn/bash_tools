@@ -1,7 +1,5 @@
 lua require('config')
 
-" Check vim's Python version: :python import sys; print(sys.version)
-" :echo has("python")
 let s:uname = system("uname -s")
 set clipboard+=unnamedplus
 set nocompatible " Use vim settings
