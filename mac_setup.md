@@ -25,9 +25,11 @@
 
 # In Terminal.app, setup iTerm
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-- `sudo vim /etc/shell` and add the line at the end `/opt/homebrew/bin/bash`
-- `chsh -s /opt/homebrew/bin/bash`
-- `brew install brave-browser google-drive openssh iterm2 git node github gnupg ctags htop pinentry-mac pwgen the_silver_searcher bash-completion font-hack-nerd-font`
+- Setup bash as the default shell
+    - `brew install bash`
+    - `sudo vim /etc/shells` and add the line at the end `/opt/homebrew/bin/bash`
+    - `chsh -s /opt/homebrew/bin/bash`
+- `brew install newovim brave-browser google-drive openssh iterm2 git node github gnupg htop pinentry-mac pwgen the_silver_searcher bash-completion font-hack-nerd-font`
     - openssh is needed to be able to use _sk ssh keys with Yubikey to clone bash_tools
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/profile ~/.profile`
 - Now open iTerm
@@ -39,13 +41,14 @@
 - `git clone git@github.com:xanderdunn/bash_tools.git`
 - Setup vim config
     - `mkdir ~/.config/nvim/`
-    - `ln -s /Users/xander/dev/bash_tools/vimrc ~/.config/nvim/init.vim`
+    - `ln -s ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim`
+    - `mkdir ~/.config/nvim/lua
+    - `ln -s ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua`
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/gitignore_global ~/.gitignore_global`
 - Install vim-plug: `sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'`
-- `pip3 install neovim`
 - `npm install -g neovim`
-- Restart nvim
-- :PlugInstall
+- `npm -g install cspell`
+- `brew install stylua`
 - Restart nvim
 - :checkhealth
 
@@ -62,22 +65,26 @@
 - git config --global commit.gpgsign true
 - You should now be able to GPG sign: `echo "test" | gpg --clearsign`
     - Debug GPG signing [here](https://drive.google.com/drive/u/0/search?q=yubieky)
-- iTerm2 -> Settings -> 
+- iTerm2 -> Settings ->
     - Profiles -> Other Actions -> Import JSON Profile -> . Select the new one and set as default.
     - Profiles -> Colors -> Color Presets -> Solarized Dark
     - Open the consolas.ttf font in Google Drive/Dropbox/config/ and Install it
     - Profiles -> Text -> Font -> Consolas, then choose font-size 14
     - Now open a new iTerm tab and re-open nvim and it should have the correct colors
-- In nvim
-    - `:CocInstall coc-pyright`
-    - `:CocConfig` and put in:
-```json
-{
-    "python.pythonPath": "/opt/homebrew/bin/python3"
-}
-  ```
 
 # Setup Python dev
 - python3 -m venv ~/.config/py_env
 - Add to ~/.profile: `source ~/.config/py_env/bin/activate`
 - pip3 install pynvim numpy pandas
+
+# Setup SSH key in the macOS Agent
+This will allow you to enter the SSH passcode once and then have it cached for the rest of the session.
+- `eval "$(ssh-agent -s)"`
+- nvim ~/.ssh/config:
+    ```
+    Host github.com
+      AddKeysToAgent yes
+      UseKeychain yes
+      IdentityFile ~/.ssh/id_ed25519
+    ```
+- `ssh-add --apple-use-keychain ~/.ssh/id_ed25519`

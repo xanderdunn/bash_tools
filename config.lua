@@ -44,8 +44,20 @@ local plugins = {
 		"maxmx03/solarized.nvim",
 		lazy = false,
 		priority = 1000,
-		config = function()
+		---@type solarized.config
+		opts = {
+			on_highlights = function(colors)
+				---@type solarized.highlights
+				local groups = {
+					Visual = { bg = colors.base02, standout = true, fg = "NONE" },
+				}
+				return groups
+			end,
+		},
+		config = function(_, opts)
+			vim.o.termguicolors = true
 			vim.o.background = "dark"
+			require("solarized").setup(opts)
 			vim.cmd.colorscheme("solarized")
 		end,
 	}, -- solarized color scheme
@@ -162,6 +174,23 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.hadolint,
 		null_ls.builtins.diagnostics.mypy,
 	},
+})
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		"c",
+		"lua",
+		"vim",
+		"vimdoc",
+		"query",
+		"markdown",
+		"markdown_inline",
+		"rust",
+		"python",
+		"cpp",
+		"asm",
+	},
+	auto_install = true,
 })
 
 -- require("auto-session").setup({

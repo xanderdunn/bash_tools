@@ -43,6 +43,7 @@ sudo apt-get install -y unzip
 # Set timezone
 sudo timedatectl set-timezone America/Los_Angeles
 
+sudo chown ubuntu:ubuntu ~/.bashrc
 add_line_to_file_if_missing "source ~/dev/bash_tools/bashrc.sh" ~/.bashrc false
 add_line_to_file_if_missing "export PATH=$PATH:~/.local/bin" ~/.bashrc false
 
@@ -50,7 +51,8 @@ sudo apt-get install -y bash-completion
 
 # Install neovim
 sudo apt-get install -y libfuse2
-wget -nc https://github.com/neovim/neovim/releases/download/v0.9.4/nvim.appimage
+# v0.9.4 does not work with the solarized plugin
+wget -nc https://github.com/neovim/neovim/releases/download/v0.10.1/nvim.appimage
 chmod u+x nvim.appimage
 sudo mv nvim.appimage /usr/local/bin/nvim
 #wget -nc https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
@@ -111,9 +113,9 @@ sudo service sshd restart
 # Now you should be able to start a new SSH session with the machine and gpg --list-keys and gpg --list-secret-keys should both work
 
 # For rust support in coc.nvim:
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-source "$HOME/.cargo/env"
-rustup component add rust-analyzer
+# curl https://sh.rustup.rs -sSf | sh -s -- -y
+# source "$HOME/.cargo/env"
+# rustup component add rust-analyzer
 
 # sudo apt-get install -y mosh
 
@@ -128,9 +130,8 @@ nvm install 18
 nvm use 18
 # Install neovim globally
 npm install -g neovim
+npm install -g cspell # spell checker
 
-# Install Coc extensions for Neovim
-nvim -c 'CocInstall coc-spell-checker'
 nvim -c 'Copilot'
 
 # Setup clipboard over ssh:
@@ -143,7 +144,7 @@ chmod +x ~/.local/bin/ttyup
 
 sudo apt-get autoremove -y
 
-echo "You'll need to copy paste the bash script to ~/.local/bin for iTerm clipboard passing to work:"
+echo "You'll need to copy paste the bash script into ~/.local/bin/ttyup for iTerm clipboard passing to work:"
 ##!/bin/bash
 #parent() { awk '{print $4}' \"/proc/$1/stat\"; }
 #leader() { awk '{print $6}' \"/proc/$1/stat\"; }
