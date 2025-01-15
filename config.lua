@@ -21,9 +21,10 @@ vim.opt.rtp:prepend(lazy_path)
 -- Find plugins: https://github.com/rockerBOO/awesome-neovim
 local plugins = {
 	{ "lewis6991/gitsigns.nvim" }, -- show lines with git diff in the gutter
-	{ "github/copilot.vim" }, -- LLM autocomplete
+	-- { "github/copilot.vim" }, -- LLM autocomplete
 	{ "williamboman/mason.nvim" }, -- LSP manager, activate with :Mason
 	{ "williamboman/mason-lspconfig.nvim" }, -- mason config manager
+	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	-- Go to definition with ctrl-]
 	-- :LspInfo to see which language servers are running on this buffer
 	{ "neovim/nvim-lspconfig" }, -- LSP config manager, used by mason, use ]d and [d to jump to prev and next
@@ -142,8 +143,13 @@ require("mason-lspconfig").setup({
 		"jsonls",
 		"taplo",
 		"yamlls",
-		"ruff_lsp",
+		"ruff",
 	},
+})
+require("mason-tool-installer").setup({
+    ensure_installed = {
+        "cspell",
+    }
 })
 local null_ls = require("null-ls")
 local cspell = require("cspell")
@@ -244,7 +250,7 @@ lsp_config.bashls.setup({})
 lsp_config.jsonls.setup({})
 lsp_config.taplo.setup({})
 lsp_config.yamlls.setup({})
-lsp_config.ruff_lsp.setup({})
+lsp_config.ruff.setup({})
 
 -- Ignore the ~/.config/nvim/undo directory for lsp language server
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

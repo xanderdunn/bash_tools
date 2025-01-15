@@ -63,10 +63,9 @@ create_dir_if_not_exist ~/.config
 create_dir_if_not_exist ~/.config/nvim
 create_dir_if_not_exist ~/.config/nvim/backup
 create_dir_if_not_exist ~/.config/nvim/swap
-# vim-plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
-nvim +PlugInstall
+create_dir_if_not_exist ~/.config/nvim/lua
+ln -sf ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua
 sudo apt-get install -y python3-pip
 python3 -m pip install --upgrade pip
 pip3 install pynvim # dependency for neovim plugin
@@ -81,8 +80,6 @@ ln -sf ~/dev/bash_tools/htoprc ~/.config/htop/htoprc
 create_dir_if_not_exist ~/.config/yapf
 ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
 ln -sf ~/dev/bash_tools/coc-settings.json ~/.config/nvim/coc-settings.json
-create_dir_if_not_exist ~/.config/nvim/lua
-ln -sf ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua
 
 # Git Setup
 # Install latest release version of git

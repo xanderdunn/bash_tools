@@ -45,7 +45,6 @@
     - `mkdir ~/.config/nvim/lua
     - `ln -s ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua`
 - `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/gitignore_global ~/.gitignore_global`
-- Install vim-plug: `sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'`
 - `npm install -g neovim`
 - `npm -g install cspell`
 - `brew install stylua`
