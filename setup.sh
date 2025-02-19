@@ -33,9 +33,8 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 # Install killall
-sudo apt-get install -y psmisc silversearcher-ag
+sudo apt-get install -y psmisc
 sudo apt-get install -y dbus # Required for timedatectl and missing on some GCP instances
-# sudo apt-get install -y postgresql-client # psql
 sudo apt-get install -y tmux
 sudo apt-get install -y htop # system perf monitoring
 sudo apt-get install -y unzip
@@ -51,21 +50,16 @@ sudo apt-get install -y bash-completion
 
 # Install neovim
 sudo apt-get install -y libfuse2
-# v0.9.4 does not work with the solarized plugin
-wget -nc https://github.com/neovim/neovim/releases/download/v0.10.1/nvim.appimage
-chmod u+x nvim.appimage
-sudo mv nvim.appimage /usr/local/bin/nvim
-#wget -nc https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
-#sudo apt-get install ./nvim-linux64.deb
-#sudo apt-get install -y python3-neovim
+sudo apt-get install -y ripgrep # For running :Rg code base search in neovim with fzf plugin
+wget -nc https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage
+chmod u+x nvim-linux-x86_64.appimage
+sudo mv nvim-linux-x86_64.appimage /usr/local/bin/nvim
 sudo apt-get install -y exuberant-ctags
 create_dir_if_not_exist ~/.config
 create_dir_if_not_exist ~/.config/nvim
 create_dir_if_not_exist ~/.config/nvim/backup
 create_dir_if_not_exist ~/.config/nvim/swap
 ln -fs ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim
-create_dir_if_not_exist ~/.config/nvim/lua
-ln -sf ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua
 sudo apt-get install -y python3-pip
 python3 -m pip install --upgrade pip
 pip3 install pynvim # dependency for neovim plugin
@@ -79,7 +73,8 @@ create_dir_if_not_exist ~/.config/htop
 ln -sf ~/dev/bash_tools/htoprc ~/.config/htop/htoprc
 create_dir_if_not_exist ~/.config/yapf
 ln -sf ~/dev/bash_tools/yapf.style ~/.config/yapf/style
-ln -sf ~/dev/bash_tools/coc-settings.json ~/.config/nvim/coc-settings.json
+create_dir_if_not_exist ~/.config/nvim/lua
+ln -sf ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua
 
 # Git Setup
 # Install latest release version of git
@@ -136,15 +131,14 @@ nvim -c 'Copilot'
 curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 add_line_to_file_if_missing "export PATH=$PATH:~/.iterm2" ~/.bashrc false
 mkdir -p ~/.local/bin
-touch ~/.local/bin/ttyup
+cat << 'EOF' > ~/.local/bin/ttyup
+#!/bin/bash
+parent() { awk '{print $4}' "/proc/$1/stat"; }
+leader() { awk '{print $6}' "/proc/$1/stat"; }
+it2copy > "/proc/$(parent $(leader $$))/fd/0"
+EOF
 chmod +x ~/.local/bin/ttyup
 
 sudo apt-get autoremove -y
-
-echo "You'll need to copy paste the bash script into ~/.local/bin/ttyup for iTerm clipboard passing to work:"
-##!/bin/bash
-#parent() { awk '{print $4}' \"/proc/$1/stat\"; }
-#leader() { awk '{print $6}' \"/proc/$1/stat\"; }
-#it2copy > \"/proc/$(parent $(leader $$))/fd/0\"
 echo "You'll need to scp the GPG keyring to the machine for commit signing to work:"
 echo "Set your hostname with: sudo hostnamectl set-hostname <hostname>"
