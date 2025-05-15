@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazy_path)
 -- Find plugins: https://github.com/rockerBOO/awesome-neovim
 local plugins = {
 	{ "lewis6991/gitsigns.nvim" }, -- show lines with git diff in the gutter
-	-- { "github/copilot.vim" }, -- LLM autocomplete
+	{ "github/copilot.vim" }, -- LLM autocomplete
 	{ "williamboman/mason.nvim" }, -- LSP manager, activate with :Mason
 	{ "williamboman/mason-lspconfig.nvim" }, -- mason config manager
 	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
@@ -30,15 +30,11 @@ local plugins = {
 	{ "neovim/nvim-lspconfig" }, -- LSP config manager, used by mason, use ]d and [d to jump to prev and next
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{ "nvim-treesitter/nvim-treesitter-context" },
-	{ "nvim-tree/nvim-tree.lua" }, -- file explorer, open with ctrl-f
-	-- Maybe replace fzf with https://github.com/nvim-telescope/telescope.nvim
-	{
-		"junegunn/fzf",
-		build = function()
-			vim.fn["fzf#install"]()
-		end,
-	}, -- fuzzy search
-	{ "junegunn/fzf.vim" }, -- fuzzy search with ctrl-p
+	{ "nvim-tree/nvim-tree.lua" }, -- file explorer, open with <space>-f
+    {
+      "nvim-telescope/telescope.nvim", tag = '0.1.8',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
 	-- { "rmagatti/auto-session" }, -- restore last open file
 	{ "numToStr/Comment.nvim" }, -- toggle comments with keystrokes gcc or gc in visual mode
 	{
@@ -123,6 +119,7 @@ local plugins = {
 	{
 		"ruanyl/vim-gh-line",
 	},
+    { "cappyzawa/trim.nvim"},
 }
 
 require("lazy").setup(plugins, {}) -- Activate with :Lazy
@@ -147,11 +144,11 @@ require("mason-lspconfig").setup({
 	},
 })
 require("mason-tool-installer").setup({
-    ensure_installed = {
-        "cspell",
-    }
+	ensure_installed = {
+		"cspell",
+	},
 })
-local null_ls = require("null-ls")
+-- local null_ls = require("null-ls")
 local cspell = require("cspell")
 local cspellConfig = {
 	config_file_preferred_name = "cspell.json",
@@ -164,23 +161,23 @@ local cspellConfig = {
 		return cspell_path
 	end,
 }
-null_ls.setup({
-	sources = {
-		cspell.diagnostics.with({
-			config = cspellConfig,
-			-- info rather than errors
-			diagnostics_postprocess = function(diagnostic)
-				diagnostic.severity = vim.diagnostic.severity["INFO"]
-			end,
-		}),
-		cspell.code_actions.with({ config = cspellConfig }),
-		-- null_ls.builtins.diagnostics.vale, -- requires .vale.ini setup
-		null_ls.builtins.formatting.codespell,
-		null_ls.builtins.diagnostics.yamllint,
-		null_ls.builtins.diagnostics.hadolint,
-		null_ls.builtins.diagnostics.mypy,
-	},
-})
+-- null_ls.setup({
+-- 	sources = {
+-- 		cspell.diagnostics.with({
+-- 			config = cspellConfig,
+-- 			-- info rather than errors
+-- 			diagnostics_postprocess = function(diagnostic)
+-- 				diagnostic.severity = vim.diagnostic.severity["INFO"]
+-- 			end,
+-- 		}),
+-- 		cspell.code_actions.with({ config = cspellConfig }),
+-- 		-- null_ls.builtins.diagnostics.vale, -- requires .vale.ini setup
+-- 		null_ls.builtins.formatting.codespell,
+-- 		null_ls.builtins.diagnostics.yamllint,
+-- 		null_ls.builtins.diagnostics.hadolint,
+-- 		null_ls.builtins.diagnostics.mypy,
+-- 	},
+-- })
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
@@ -197,6 +194,13 @@ require("nvim-treesitter.configs").setup({
 		"asm",
 	},
 	auto_install = true,
+})
+require('trim').setup({
+  -- if you want to disable trim on write by default
+  trim_on_write = false,
+
+  -- highlight trailing spaces
+  highlight = true
 })
 
 -- require("auto-session").setup({
@@ -222,9 +226,9 @@ require("formatter").setup({
 	},
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	command = ":FormatWrite",
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- 	command = ":FormatWrite",
+-- })
 
 local lsp_config = require("lspconfig")
 lsp_config.lua_ls.setup({
@@ -252,6 +256,12 @@ lsp_config.taplo.setup({})
 lsp_config.yamlls.setup({})
 lsp_config.ruff.setup({})
 
+require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = { "wandb/.*", "__pycache__/.*", ".git/.*", ".venv/.*" },
+  },
+})
+
 -- Ignore the ~/.config/nvim/undo directory for lsp language server
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.config/nvim/undo*",
@@ -273,6 +283,35 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
 -- vim.opt.foldlevelstart = 1
 vim.opt.signcolumn = "yes"
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Telescope find files' })
+vim.api.nvim_create_user_command(
+  'Rg',
+  function() builtin.live_grep() end,
+  { desc = 'Telescope live grep' }
+)
+
+-- This is to copy to the local clipboard over SSH using i2copy from iTerm
+-- Uncomment this on a remote machine
+-- ttyup refers to this custom executable script in PATH:
+-- #!/bin/bash
+-- parent() { awk '{print $4}' "/proc/$1/stat"; }
+-- leader() { awk '{print $6}' "/proc/$1/stat"; }
+-- it2copy > "/proc/$(parent $(leader $$))/fd/0"
+-- From https://stackoverflow.com/a/73531771/529743
+-- vim.g.clipboard = {
+-- 	name = "iterm2",
+-- 	copy = {
+-- 		["+"] = { "ttyup" },
+-- 		["*"] = { "ttyup" },
+-- 	},
+-- 	paste = {
+-- 		["+"] = { "+" },
+-- 		["*"] = { "*" },
+-- 	},
+-- 	cache_enabled = 1,
+-- }
 
 -- Remember:
 -- Open all folds: zR

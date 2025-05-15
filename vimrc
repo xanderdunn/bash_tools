@@ -62,8 +62,6 @@ set incsearch		" do incremental searching
 " Auto save
 :au FocusLost * silent! wa
 
-" use ctrl-p to open fuzzy search
-nnoremap <C-p> :<C-u>FZF<CR>
 " use ctrl-f to open the file explorer
 nnoremap <leader>f :NvimTreeToggle<CR>
 
