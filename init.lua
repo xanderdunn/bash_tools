@@ -215,7 +215,6 @@ require("lazy").setup(plugins, {})
 require("gitsigns").setup()
 require("mason").setup()
 require("nvim-tree").setup()
-
 require("mason-lspconfig").setup({
   automatic_installation = true,
   ensure_installed = {
@@ -224,7 +223,6 @@ require("mason-lspconfig").setup({
   },
 })
 require("mason-tool-installer").setup({ ensure_installed = { "cspell" } })
-
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "c","lua","vim","vimdoc","query","markdown","markdown_inline",
@@ -232,10 +230,8 @@ require("nvim-treesitter.configs").setup({
   },
   auto_install = true,
 })
-
 require("trim").setup({ trim_on_write = false, highlight = true })
 require("Comment").setup()
-
 require("formatter").setup({
   filetype = {
     python = { require("formatter.filetypes.python").ruff },

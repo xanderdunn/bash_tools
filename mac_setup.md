@@ -22,6 +22,7 @@
 - Add extensions to Brave
     - [Distraction Free YouTube](https://chrome.google.com/webstore/detail/df-tube-distraction-free/mjdepdfccjgcndkmemponafgioodelna?hl=en)
     - [Markdown Here](https://chrome.google.com/webstore/detail/markdown-here/elifhakcjgalahccnjkneoccemfahfoa?hl=en)
+- Go to brave://settings/appearance and turn off all the buttons.
 
 # In Terminal.app, setup iTerm
 - Install Homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
@@ -29,11 +30,14 @@
     - `brew install bash`
     - `sudo vim /etc/shells` and add the line at the end `/opt/homebrew/bin/bash`
     - `chsh -s /opt/homebrew/bin/bash`
-- `brew install newovim brave-browser google-drive openssh iterm2 git node github gnupg htop pinentry-mac pwgen the_silver_searcher bash-completion font-hack-nerd-font`
+- `brew install neovim brave-browser google-drive openssh iterm2 git node github gnupg htop pinentry-mac pwgen bash-completion font-hack-nerd-font wget coreutils ripgrep`
     - openssh is needed to be able to use _sk ssh keys with Yubikey to clone bash_tools
-- `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/profile ~/.profile`
+    - `coreutils` gives `gls` gnu ls
+- `ln -s ~/dev/bash_tools/aerospace.toml ~/.aerospace.toml`
+- `brew install --cask nikitabobko/tap/aerospace`
+- `ln -s ~/dev/bash_tools/bashrc.sh ~/.profile`
 - Now open iTerm
-- Load the file `/Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/iterm_profile_visible_selection.json` into iTerm profiles and set it as the default
+- From this repo, load the file xander-iterm-profile.json into iTerm profiles and set it as the default
 
 # In iTerm, setup neovim
 - AirDrop the _sk SSH private and public keys to your ~/.ssh/
@@ -41,10 +45,8 @@
 - `git clone git@github.com:xanderdunn/bash_tools.git`
 - Setup vim config
     - `mkdir ~/.config/nvim/`
-    - `ln -s ~/dev/bash_tools/vimrc ~/.config/nvim/init.vim`
-    - `mkdir ~/.config/nvim/lua
-    - `ln -s ~/dev/bash_tools/config.lua ~/.config/nvim/lua/config.lua`
-- `ln -s /Users/xander/Library/CloudStorage/GoogleDrive-xander\@xander.ai/My\ Drive/Dropbox/config/gitignore_global ~/.gitignore_global`
+    - `ln -s ~/dev/bash_tools/init.lua ~/.config/nvim/init.lua`
+- `ln -s ~/dev/bash_tools/gitignore_global ~/.gitignore_global`
 - `npm install -g neovim`
 - `npm -g install cspell`
 - `brew install stylua`
@@ -64,11 +66,9 @@
 - git config --global commit.gpgsign true
 - You should now be able to GPG sign: `echo "test" | gpg --clearsign`
     - Debug GPG signing [here](https://drive.google.com/drive/u/0/search?q=yubieky)
+- Open the consolas.ttf font and Install it
 - iTerm2 -> Settings ->
     - Profiles -> Other Actions -> Import JSON Profile -> . Select the new one and set as default.
-    - Profiles -> Colors -> Color Presets -> Solarized Dark
-    - Open the consolas.ttf font in Google Drive/Dropbox/config/ and Install it
-    - Profiles -> Text -> Font -> Consolas, then choose font-size 14
     - Now open a new iTerm tab and re-open nvim and it should have the correct colors
 
 # Setup Python dev
@@ -86,4 +86,4 @@ This will allow you to enter the SSH passcode once and then have it cached for t
       UseKeychain yes
       IdentityFile ~/.ssh/id_ed25519
     ```
-- `ssh-add --apple-use-keychain ~/.ssh/id_ed25519`
+- `/usr/bin/ssh-add --apple-use-keychain ~/.ssh/id_ed25519`
