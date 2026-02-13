@@ -103,6 +103,19 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- 2 spaces indentation in markdown files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    -- make sure we’re still using spaces, not real tabs
+    vim.bo.expandtab    = true
+    -- and set the indent width to 2
+    vim.bo.tabstop      = 2
+    vim.bo.shiftwidth   = 2
+    vim.bo.softtabstop  = 2
+  end,
+})
+
 ----------------------------------------------------------------
 --                                                             --
 --   3.  keymaps                                               --
@@ -181,7 +194,7 @@ local plugins = {
     },
     config = function(_, opts)
       opt.termguicolors = true
-      opt.background = "dark"
+      opt.background = "light"
       require("solarized").setup(opts)
       vim.cmd.colorscheme("solarized")
     end,
@@ -198,7 +211,7 @@ local plugins = {
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>" },
       { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>" },
       { "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>" },
-      { "<c-l>", "<cmd>Trouble loclist toggle<cr>" },
+      -- { "<c-l>", "<cmd>Trouble loclist toggle<cr>" },
       { "<c-q>", "<cmd>Trouble qflist toggle<cr>" },
     },
   },
@@ -240,20 +253,17 @@ require("formatter").setup({
     ["*"]  = { require("formatter.filetypes.any").remove_trailing_whitespace },
   },
 })
+require("trouble").setup({
+})
 
 -- LSPs --------------------------------------------------------
-local lsp = require("lspconfig")
-lsp.lua_ls.setup({ settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
-lsp.rust_analyzer.setup({})
-lsp.pyright.setup({})
-lsp.dockerls.setup({})
-lsp.vimls.setup({})
-lsp.marksman.setup({})
-lsp.bashls.setup({})
-lsp.jsonls.setup({})
-lsp.taplo.setup({})
-lsp.yamlls.setup({})
-lsp.ruff.setup({})
+vim.lsp.config('lua_ls', {
+  settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+})
+vim.lsp.enable({
+  'lua_ls', 'rust_analyzer', 'pyright', 'dockerls', 'vimls',
+  'marksman', 'bashls', 'jsonls', 'taplo', 'yamlls', 'ruff',
+})
 
 -- Telescope ---------------------------------------------------
 require("telescope").setup({

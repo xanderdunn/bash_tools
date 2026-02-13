@@ -1,8 +1,8 @@
 # shell settings {{{
-shopt -s extglob # Enable extended glob so that commands like rm !(test2) are possible
+# shopt -s extglob # Enable extended glob so that commands like rm !(test2) are possible
 
 # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+# shopt -s checkwinsize
 
 # vim keybindings in bash
 set -o vi

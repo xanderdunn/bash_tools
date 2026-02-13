@@ -99,6 +99,9 @@ automatically-unhide-macos-hidden-apps = false
     cmd-h = "workspace prev"
     cmd-l = "workspace next"
 
+    alt-cmd-i = "move-workspace-to-monitor right"
+    alt-cmd-n = "move-workspace-to-monitor left"
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
@@ -212,4 +215,3 @@ automatically-unhide-macos-hidden-apps = false
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
-

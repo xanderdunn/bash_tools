@@ -9,7 +9,7 @@
 *.swo
 *.pyc
 bii
- 
+
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -22,14 +22,14 @@ bii
 *.rar
 *.tar
 *.zip
- 
+
 # Logs and databases #
 ######################
 *.log
 *.sql
 *.sqlite
 # *.txt
- 
+
 # OS generated files #
 ######################
 .DS_Store
@@ -95,9 +95,16 @@ scapegoat*
 .gradle
 
 # Binaries
-*.png
+# *.png
 *.mp4
 
 node_modules/
 lint.sh
 test.sh
+
+*.json
+*.lprof
+
+.claude
+.codex
+.roborev.toml
