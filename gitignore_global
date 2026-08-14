@@ -23,3 +23,5 @@ ehthumbs.db
 *.swo
 *.swn
 *~
+
+.vim-session.vim
