@@ -132,6 +132,11 @@ automatically-unhide-macos-hidden-apps = false
     alt-7 = 'workspace 7'
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
+    # Recall the baseline app layout for already-open windows
+    alt-0 = 'exec-and-forget /Users/xander/.local/bin/aerospace-baseline-layout'
+    # Recall the external display four-app layout for already-open windows
+    alt-shift-0 = 'exec-and-forget /Users/xander/.local/bin/aerospace-external-layout'
+    alt-backtick = 'exec-and-forget /Users/xander/.local/bin/aerospace-external-layout'
     alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
     alt-b = 'workspace B'
     alt-c = 'workspace C'

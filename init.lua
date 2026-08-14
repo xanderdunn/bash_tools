@@ -17,6 +17,13 @@ local function vmap(lhs, rhs, opts) map("v", lhs, rhs, opts or {}) end
 g.mapleader = " "                          -- SPACE as <leader>
 g.loaded_netrw, g.loaded_netrwPlugin = 1, 1 -- nvim-tree prefers netrw disabled
 
+-- Kill built-in treesitter (broken on 0.12.1 for markdown); stop any attach attempt.
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "FileType" }, {
+  callback = function(args)
+    pcall(vim.treesitter.stop, args.buf)
+  end,
+})
+
 opt.clipboard:append("unnamedplus")
 opt.modelines = 0
 opt.expandtab = true
@@ -175,13 +182,13 @@ opt.rtp:prepend(lazy_path)
 
 local plugins = {
   { "lewis6991/gitsigns.nvim" },
-  { "github/copilot.vim" },
+  -- { "github/copilot.vim" },
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
   { "WhoIsSethDaniel/mason-tool-installer.nvim" },
   { "neovim/nvim-lspconfig" },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  { "nvim-treesitter/nvim-treesitter-context" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", enabled = false },
+  { "nvim-treesitter/nvim-treesitter-context", enabled = false },
   { "nvim-tree/nvim-tree.lua" },
   { "nvim-telescope/telescope.nvim", tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" } },
@@ -236,13 +243,14 @@ require("mason-lspconfig").setup({
   },
 })
 require("mason-tool-installer").setup({ ensure_installed = { "cspell" } })
-require("nvim-treesitter.configs").setup({
-  ensure_installed = {
-    "c","lua","vim","vimdoc","query","markdown","markdown_inline",
-    "rust","python","cpp","asm",
-  },
-  auto_install = true,
-})
+-- nvim-treesitter disabled due to 0.12.1 incompatibility
+-- require("nvim-treesitter.configs").setup({
+--   ensure_installed = {
+--     "c","lua","vim","vimdoc","query","markdown","markdown_inline",
+--     "rust","python","cpp","asm",
+--   },
+--   auto_install = true,
+-- })
 require("trim").setup({ trim_on_write = false, highlight = true })
 require("Comment").setup()
 require("formatter").setup({
@@ -276,10 +284,8 @@ nmap("<C-p>", builtin.find_files, { desc = "Telescope find files" })
 vim.api.nvim_create_user_command("Rg", function() builtin.live_grep() end,
   { desc = "Telescope live grep" })
 
--- treesitter folding -----------------------------------------
-opt.foldmethod = "expr"
-opt.foldexpr   = "v:lua.vim.treesitter.foldexpr()"
-opt.foldtext   = ""
+-- folding disabled
+opt.foldenable = false
 
 -- diagnostics / code actions
 nmap("ca", vim.lsp.buf.code_action, {})
