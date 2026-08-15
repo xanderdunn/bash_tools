@@ -243,6 +243,18 @@ require("mason-lspconfig").setup({
   },
 })
 require("mason-tool-installer").setup({ ensure_installed = { "cspell" } })
+local cspell = require("cspell")
+
+require("null-ls").setup({
+  sources = {
+    cspell.diagnostics.with({
+      filetypes = { "markdown" },
+    }),
+    cspell.code_actions.with({
+      filetypes = { "markdown" },
+    }),
+  },
+})
 -- nvim-treesitter disabled due to 0.12.1 incompatibility
 -- require("nvim-treesitter.configs").setup({
 --   ensure_installed = {
